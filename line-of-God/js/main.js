@@ -53,9 +53,9 @@ function paint(pointer, x, y) {
     if (pointer.isDown)
     {
         //  Change the 4 - the width of the pen, to anything you like
-        bmd.circle(x, y, 4, colors[i].rgba);
+        bmd.circle(x, y, 6, colors[i].rgba);
 
-        i = game.math.wrapValue(i, 1, 359);
+        i = game.math.wrapValue(i, 1, 300);
     }
 
 }
@@ -63,7 +63,7 @@ function paint(pointer, x, y) {
 function update() {
 
     //  Change the 0.1 to something like 0.5 for a shorter 'trail'
-    bmdDest.fill(0, 0, 0, 0.1);
+    bmdDest.fill(0, 0, 0, 0.5);
 
     //  Change the 0.7 at the end, it's the alpha value, lower it for a softer effect
     bmdDest.copy(bmd, 0, 0);
