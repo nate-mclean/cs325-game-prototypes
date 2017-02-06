@@ -53,7 +53,7 @@ function create() {
     pandas.enableBody = true;
     pandas.physicsBodyType = Phaser.Physics.P2JS;
 
-    for (var i = 0; i < 4; i++)
+    for (var i = 0; i < 10; i++)
     {
         var panda = pandas.create(game.world.randomX, game.world.randomY, 'panda');
         panda.body.setRectangle(40, 40);
@@ -69,13 +69,14 @@ function create() {
 
     //  Create our ship sprite
     ship = game.add.sprite(300, 300, 'ship');
-    ship.scale.set(2);
-    ship.smoothed = false;
-    ship.animations.add('fly', [0,1,2,3,4,5], 10, true);
-    ship.play('fly');
+    myGame.physics.arcade.enable(ship);
+    //ship.scale.set(2);
+    //ship.smoothed = false;
+    //ship.animations.add('fly', [0,1,2,3,4,5], 10, true);
+    //ship.play('fly');
 
     game.physics.p2.enable(ship, false);
-    ship.body.setCircle(150);
+    ship.body.setCircle(30);
     ship.body.fixedRotation = true;
 
     //  Set the ships collision group
