@@ -71,8 +71,8 @@ function create() {
     ship = game.add.sprite(200, 200, 'ship');
     ship.scale.set(2);
     ship.smoothed = false;
-    ship.animations.add('fly', [0,1,2,3,4,5], 10, true);
-    ship.play('fly');
+    //ship.animations.add('fly', [0,1,2,3,4,5], 10, true);
+    //ship.play('fly');
 
     game.physics.p2.enable(ship, false);
     ship.body.setCircle(28);
