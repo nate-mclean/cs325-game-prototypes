@@ -18,7 +18,7 @@ window.onload = function() {
     function preload() {
 
     game.load.image('stars', 'assets/stars.jpg');
-    game.load.spritesheet('ship', 'assets/god.png', 32, 32);
+    game.load.image('ship', 'assets/god.png', 32, 32);
     game.load.image('panda', 'assets/asteroid.png');
     game.load.image('sweet', 'assets/sprites/spinObj_06.png');
 
@@ -72,8 +72,8 @@ function create() {
     //myGame.physics.arcade.enable(ship);
     //ship.scale.set(2);
     //ship.smoothed = false;
-    ship.animations.add('fly', [0], 1, true);
-    ship.play('fly');
+    //ship.animations.add('fly', [0], 1, true);
+    //ship.play('fly');
 
     game.physics.p2.enable(ship, false);
     ship.body.setCircle(30);
