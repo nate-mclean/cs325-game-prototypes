@@ -57,7 +57,7 @@ function create() {
     {
         var panda = pandas.create(game.world.randomX, game.world.randomY, 'panda');
         panda.body.setRectangle(40, 40);
-        panda.body.alpha -= 0.1;
+        //panda.body.alpha -= 0.5;
 
         //  Tell the panda to use the pandaCollisionGroup 
         panda.body.setCollisionGroup(pandaCollisionGroup);
@@ -98,7 +98,7 @@ function hitPanda(body1, body2) {
     //  body1 is the space ship (as it's the body that owns the callback)
     //  body2 is the body it impacted with, in this case our panda
     //  As body2 is a Phaser.Physics.P2.Body object, you access its own (the sprite) via the sprite property:
-    body2.sprite.alpha -= 0.1;
+    //body2.sprite.alpha -= 0.1;
 
 }
 
