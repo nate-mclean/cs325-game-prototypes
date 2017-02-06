@@ -20,33 +20,53 @@ window.onload = function() {
         game.load.image( 'logo', 'assets/phaser.png' );
     }
     
-    var bouncy;
+    //var bouncy;
+    var i;
+    var r;
+    var bmd;
+    var bmdDest;        
+    var colors;
     
     function create() {
-        // Create a sprite at the center of the screen using the 'logo' image.
-        bouncy = game.add.sprite( game.world.centerX, game.world.centerY, 'logo' );
-        // Anchor the sprite at its center, as opposed to its top-left corner.
-        // so it will be truly centered.
-        bouncy.anchor.setTo( 0.5, 0.5 );
-        
-        // Turn on the arcade physics engine for this sprite.
-        game.physics.enable( bouncy, Phaser.Physics.ARCADE );
-        // Make it bounce off of the world bounds.
-        bouncy.body.collideWorldBounds = true;
-        
-        // Add some text using a CSS style.
-        // Center it in X, and position its top 15 pixels from the top of the world.
-        var style = { font: "25px Verdana", fill: "#9999ff", align: "center" };
-        var text = game.add.text( game.world.centerX, 15, "Build something amazing.", style );
-        text.anchor.setTo( 0.5, 0.0 );
+bmd = game.make.bitmapData(game.width, game.height);
+
+    bmdDest = game.make.bitmapData(game.width, game.height);
+    bmdDest.addToWorld();
+
+    colors = Phaser.Color.HSVColorWheel();
+
+    game.input.addMoveCallback(paint, this);
+
+    i = 0;
+    r = new Phaser.Rectangle(0, 0, game.width, game.height);
+
+    //  r = the rotation, s = the scale
+    data = { r: 0, s: 0.5 };
+
+    //  Change the tween duration, ease type, values, etc for different effects
+    game.add.tween(data).to( { r: 360, s: 2 }, 2000, Phaser.Easing.Sinusoidal.InOut, true, 0, Number.MAX_VALUE, true);
+
+}
+
+function paint(pointer, x, y) {
+
+    if (pointer.isDown)
+    {
+        //  Change the 4 - the width of the pen, to anything you like
+        bmd.circle(x, y, 4, colors[i].rgba);
+
+        i = game.math.wrapValue(i, 1, 359);
     }
-    
-    function update() {
-        // Accelerate the 'logo' sprite towards the cursor,
-        // accelerating at 500 pixels/second and moving no faster than 500 pixels/second
-        // in X or Y.
-        // This function returns the rotation angle that makes it visually match its
-        // new trajectory.
-        bouncy.rotation = game.physics.arcade.accelerateToPointer( bouncy, this.game.input.activePointer, 500, 500, 500 );
-    }
+
+}
+
+function update() {
+
+    //  Change the 0.1 to something like 0.5 for a shorter 'trail'
+    bmdDest.fill(0, 0, 0, 0.1);
+
+    //  Change the 0.7 at the end, it's the alpha value, lower it for a softer effect
+    bmdDest.copy(bmd, 0, 0);
+
+}
 };
