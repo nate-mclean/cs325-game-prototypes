@@ -57,6 +57,8 @@ function create() {
     {
         var panda = pandas.create(game.world.randomX, game.world.randomY, 'panda');
         panda.body.setRectangle(40, 40);
+         panda.body.velocity.x = 5;
+    panda.body.velocity.y = 5;
         //panda.body.alpha -= 0.5;
 
         //  Tell the panda to use the pandaCollisionGroup 
