@@ -53,10 +53,11 @@ function create() {
     pandas.enableBody = true;
     pandas.physicsBodyType = Phaser.Physics.P2JS;
 
-    for (var i = 0; i < 10; i++)
+    for (var i = 0; i < 20; i++)
     {
         var panda = pandas.create(game.world.randomX, game.world.randomY, 'panda');
         panda.body.setRectangle(40, 40);
+        panda.body.alpha -= 0.1;
 
         //  Tell the panda to use the pandaCollisionGroup 
         panda.body.setCollisionGroup(pandaCollisionGroup);
