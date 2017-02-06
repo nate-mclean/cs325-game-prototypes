@@ -69,7 +69,7 @@ function create() {
 
     //  Create our ship sprite
     ship = game.add.sprite(300, 300, 'ship');
-    myGame.physics.arcade.enable(ship);
+    //myGame.physics.arcade.enable(ship);
     //ship.scale.set(2);
     //ship.smoothed = false;
     //ship.animations.add('fly', [0,1,2,3,4,5], 10, true);
