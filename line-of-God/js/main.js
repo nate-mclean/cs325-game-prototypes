@@ -75,7 +75,7 @@ function create() {
     ship.play('fly');
 
     game.physics.p2.enable(ship, false);
-    ship.body.setCircle(28);
+    ship.body.setCircle(150);
     ship.body.fixedRotation = true;
 
     //  Set the ships collision group
