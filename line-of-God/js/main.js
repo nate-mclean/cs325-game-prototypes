@@ -139,7 +139,7 @@ function update() {
     }
     
     //spawn pandas randomly
-    double rand = Math.random();
+    var rand = Math.random();
     rand *= 100;
     if(rand > 95){
      var panda = pandas.create(game.world.randomX, game.world.randomY, 'panda');
