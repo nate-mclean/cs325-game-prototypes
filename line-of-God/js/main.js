@@ -145,10 +145,10 @@ function update() {
     var rand = Math.random();
     rand *= 100;
     if(rand > 95){
-     var panda = pandas.create(game.world.randomX, game.world.randomY, 'panda');
+     var panda = pandas.create(-10, game.world.randomY, 'panda');
      panda.body.setRectangle(40, 40);
-     panda.body.velocity.x = 75;
-     panda.body.velocity.y = 75;
+     panda.body.velocity.x = Math.floor(Math.random()*200)+100; //100 to 300 x vel
+     panda.body.velocity.y = Math.floor(Math.random()*200)-100; //-100  to 100 y vel
  
         //  Tell the panda to use the pandaCollisionGroup 
      panda.body.setCollisionGroup(pandaCollisionGroup);
