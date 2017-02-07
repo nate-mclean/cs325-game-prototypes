@@ -115,24 +115,24 @@ function update() {
 
     if (cursors.left.isDown)
     {
-        ship.body.velocity.x -= 1;
-        ship.body.moveLeft(-ship.body.velocity.x);
+        ship.body.velocity.x -= 2;
+        ship.body.moveLeft(-ship.body.velocity.x + 5);
     }
     else if (cursors.right.isDown)
     {
-        ship.body.velocity.x += 1;
-        ship.body.moveRight(ship.body.velocity.x);
+        ship.body.velocity.x += 2;
+        ship.body.moveRight(ship.body.velocity.x + 5);
     }
 
     if (cursors.up.isDown)
     {
-        ship.body.velocity.y -= 1;
-        ship.body.moveUp(-ship.body.velocity.y );
+        ship.body.velocity.y -= 2;
+        ship.body.moveUp(-ship.body.velocity.y + 5);
     }
     else if (cursors.down.isDown)
     {
-        ship.body.velocity.y += 1;
-        ship.body.moveDown(ship.body.velocity.y );
+        ship.body.velocity.y += 2;
+        ship.body.moveDown(ship.body.velocity.y + 5);
     }
 
     if (!game.camera.atLimit.x)
