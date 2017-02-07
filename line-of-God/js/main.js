@@ -138,19 +138,24 @@ function update() {
         starfield.tilePosition.y += (ship.body.velocity.y * 16) * game.time.physicsElapsed;
     }
     
+    //spawn pandas randomly
+    double rand = Math.random();
+    rand *= 100;
+    if(rand > 95){
      var panda = pandas.create(game.world.randomX, game.world.randomY, 'panda');
      panda.body.setRectangle(40, 40);
      panda.body.velocity.x = 75;
      panda.body.velocity.y = 75;
+     }
         //panda.body.alpha -= 0.5;
 
         //  Tell the panda to use the pandaCollisionGroup 
-     panda.body.setCollisionGroup(pandaCollisionGroup);
+     //panda.body.setCollisionGroup(pandaCollisionGroup);
 
         //  Pandas will collide against themselves and the player
         //  If you don't set this they'll not collide with anything.
         //  The first parameter is either an array or a single collision group.
-      panda.body.collides([pandaCollisionGroup, playerCollisionGroup]);
+      //panda.body.collides([pandaCollisionGroup, playerCollisionGroup]);
 
 }
 
