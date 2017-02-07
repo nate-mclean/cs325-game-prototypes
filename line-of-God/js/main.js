@@ -141,10 +141,9 @@ function update() {
         starfield.tilePosition.y += (ship.body.velocity.y * 16) * game.time.physicsElapsed;
     }
     
-    //spawn pandas randomly
-    var rand = Math.random();
-    rand *= 100;
-    if(rand > 95){
+    //spawn pandas randomly 1 in 40 chance
+
+    if(Math.random()*200 > 195){
      var panda = pandas.create(-10, game.world.randomY, 'panda');
      panda.body.setRectangle(40, 40);
      panda.body.velocity.x = Math.floor(Math.random()*200)+100; //100 to 300 x vel
