@@ -111,7 +111,7 @@ function hitPanda(body1, body2) {
 
 function update() {
 
-    ship.body.setZeroVelocity();
+    //ship.body.setZeroVelocity();
 
     if (cursors.left.isDown)
     {
