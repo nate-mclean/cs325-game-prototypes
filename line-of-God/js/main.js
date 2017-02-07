@@ -27,6 +27,7 @@ window.onload = function() {
 var ship;
 var starfield;
 var cursors;
+var pandas;
 
 function create() {
 
@@ -49,7 +50,7 @@ function create() {
     starfield = game.add.tileSprite(0, 0, 800, 600, 'stars');
     starfield.fixedToCamera = true;
 
-    var pandas = game.add.group();
+    pandas = game.add.group();
     pandas.enableBody = true;
     pandas.physicsBodyType = Phaser.Physics.P2JS;
 
