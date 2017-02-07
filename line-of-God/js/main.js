@@ -49,7 +49,7 @@ function create() {
     //  (which we do) - what this does is adjust the bounds to use its own collision group.
     //game.physics.p2.updateBoundsCollisionGroup();
 
-    starfield = game.add.tileSprite(0, 0, 1000, 600, 'stars');
+    starfield = game.add.tileSprite(0, 0, 1100, 800, 'stars');
     starfield.fixedToCamera = true;
 
     pandas = game.add.group();
