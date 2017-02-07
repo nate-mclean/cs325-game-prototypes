@@ -135,6 +135,7 @@ function update() {
         ship.body.moveDown(ship.body.velocity.y + 5);
     }
 
+/*
     if (!game.camera.atLimit.x)
     {
         starfield.tilePosition.x += (ship.body.velocity.x * 16) * game.time.physicsElapsed;
@@ -144,6 +145,7 @@ function update() {
     {
         starfield.tilePosition.y += (ship.body.velocity.y * 16) * game.time.physicsElapsed;
     }
+    */
     
     //spawn pandas randomly 1 in 100 chance
 
