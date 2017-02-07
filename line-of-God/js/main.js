@@ -113,6 +113,7 @@ function update() {
 
     //ship.body.setZeroVelocity();
 
+        //god fluid space-like movement
     if (cursors.left.isDown)
     {
         ship.body.velocity.x -= 2;
@@ -136,14 +137,15 @@ function update() {
     }
 
 
-    if (game.camera.atLimit.x)
+        //keep god in bounds. bounce him back in
+    if (ship.body.position.x > 900 || ship.body.position.x < 0)
     {
-        ship.body.setZeroVelocity();
+        ship.body.velocity.x = -1 * ship.body.velocity.x;
     }
 
-    if (game.camera.atLimit.y)
+    if (ship.body.position.y > 500 || ship.body.position.y < 0)
     {
-        ship.body.setZeroVelocity();
+        ship.body.velocity.y = -1 * ship.body.velocity.y;
     }
  
     
