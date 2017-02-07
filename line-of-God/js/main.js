@@ -40,13 +40,11 @@ function create() {
 
     //  Create our collision groups. One for the player, one for the pandas
     var playerCollisionGroup = game.physics.p2.createCollisionGroup();
-        game.physics.p2.updateBoundsCollisionGroup();
-        
     var pandaCollisionGroup = game.physics.p2.createCollisionGroup();
 
     //  This part is vital if you want the objects with their own collision groups to still collide with the world bounds
     //  (which we do) - what this does is adjust the bounds to use its own collision group.
-
+    //game.physics.p2.updateBoundsCollisionGroup();
 
     starfield = game.add.tileSprite(0, 0, 800, 600, 'stars');
     starfield.fixedToCamera = true;
@@ -55,6 +53,7 @@ function create() {
     pandas.enableBody = true;
     pandas.physicsBodyType = Phaser.Physics.P2JS;
 
+/*
     for (var i = 0; i < 20; i++)
     {
         var panda = pandas.create(game.world.randomX, game.world.randomY, 'panda');
@@ -71,6 +70,7 @@ function create() {
         //  The first parameter is either an array or a single collision group.
         panda.body.collides([pandaCollisionGroup, playerCollisionGroup]);
     }
+    */
 
     //  Create our ship sprite
     ship = game.add.sprite(300, 300, 'ship');
@@ -137,6 +137,20 @@ function update() {
     {
         starfield.tilePosition.y += (ship.body.velocity.y * 16) * game.time.physicsElapsed;
     }
+    
+     var panda = pandas.create(game.world.randomX, game.world.randomY, 'panda');
+     panda.body.setRectangle(40, 40);
+     panda.body.velocity.x = 75;
+     panda.body.velocity.y = 75;
+        //panda.body.alpha -= 0.5;
+
+        //  Tell the panda to use the pandaCollisionGroup 
+     panda.body.setCollisionGroup(pandaCollisionGroup);
+
+        //  Pandas will collide against themselves and the player
+        //  If you don't set this they'll not collide with anything.
+        //  The first parameter is either an array or a single collision group.
+      panda.body.collides([pandaCollisionGroup, playerCollisionGroup]);
 
 }
 
