@@ -115,20 +115,20 @@ function update() {
 
     if (cursors.left.isDown)
     {
-        ship.body.moveLeft(200);
+        ship.body.moveLeft(-ship.body.velocity.x + 10);
     }
     else if (cursors.right.isDown)
     {
-        ship.body.moveRight(200);
+        ship.body.moveRight(ship.body.velocity.x + 10);
     }
 
     if (cursors.up.isDown)
     {
-        ship.body.moveUp(200);
+        ship.body.moveUp(-ship.body.velocity.y + 10);
     }
     else if (cursors.down.isDown)
     {
-        ship.body.moveDown(200);
+        ship.body.moveDown(ship.body.velocity.y + 10);
     }
 
     if (!game.camera.atLimit.x)
