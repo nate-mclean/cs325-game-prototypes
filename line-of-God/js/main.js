@@ -28,6 +28,8 @@ var ship;
 var starfield;
 var cursors;
 var pandas;
+var playerCollisionGroup;
+var pandaCollisionGroup;
 
 function create() {
 
@@ -40,8 +42,8 @@ function create() {
     game.physics.p2.restitution = 0.8;
 
     //  Create our collision groups. One for the player, one for the pandas
-    var playerCollisionGroup = game.physics.p2.createCollisionGroup();
-    var pandaCollisionGroup = game.physics.p2.createCollisionGroup();
+    playerCollisionGroup = game.physics.p2.createCollisionGroup();
+    pandaCollisionGroup = game.physics.p2.createCollisionGroup();
 
     //  This part is vital if you want the objects with their own collision groups to still collide with the world bounds
     //  (which we do) - what this does is adjust the bounds to use its own collision group.
@@ -147,16 +149,15 @@ function update() {
      panda.body.setRectangle(40, 40);
      panda.body.velocity.x = 75;
      panda.body.velocity.y = 75;
-     }
-        //panda.body.alpha -= 0.5;
-
+ 
         //  Tell the panda to use the pandaCollisionGroup 
-     //panda.body.setCollisionGroup(pandaCollisionGroup);
+     panda.body.setCollisionGroup(pandaCollisionGroup);
 
         //  Pandas will collide against themselves and the player
         //  If you don't set this they'll not collide with anything.
         //  The first parameter is either an array or a single collision group.
-      //panda.body.collides([pandaCollisionGroup, playerCollisionGroup]);
+    panda.body.collides([pandaCollisionGroup, playerCollisionGroup]);
+         }
 
 }
 
