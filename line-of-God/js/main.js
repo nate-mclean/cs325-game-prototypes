@@ -20,6 +20,7 @@ window.onload = function() {
     game.load.image('stars', 'assets/stars.jpg');
     game.load.image('ship', 'assets/god.png', 32, 32);
     game.load.image('panda', 'assets/asteroid.png');
+    game.load.image('explosion', 'assets/explosion.png');
     game.load.image('sweet', 'assets/sprites/spinObj_06.png');
 
 }
@@ -28,6 +29,7 @@ var ship;
 var starfield;
 var cursors;
 var pandas;
+var explosions;
 var playerCollisionGroup;
 var pandaCollisionGroup;
 
@@ -55,6 +57,10 @@ function create() {
     pandas = game.add.group();
     pandas.enableBody = true;
     pandas.physicsBodyType = Phaser.Physics.P2JS;
+    
+    //add group for explosions
+    explosions = game.add.group();
+    
 
 /*
     for (var i = 0; i < 20; i++)
@@ -100,12 +106,16 @@ function create() {
 
 }
 
+//asteroid collision
 function hitPanda(body1, body2) {
 
-    //  body1 is the space ship (as it's the body that owns the callback)
-    //  body2 is the body it impacted with, in this case our panda
-    //  As body2 is a Phaser.Physics.P2.Body object, you access its own (the sprite) via the sprite property:
-    //body2.sprite.alpha -= 0.1;
+    //show explosion
+       var explosion = explosions.create((body1.x + body2.x)/2-200, (body1.y + body2.y)/2-100, 'explosion');
+
+    //remove both bodies from screen
+    body1.x = 2000;
+    body2.x = 1000;
+    
 
 }
 
@@ -169,7 +179,10 @@ function update() {
         //  Pandas will collide against themselves and the player
         //  If you don't set this they'll not collide with anything.
         //  The first parameter is either an array or a single collision group.
-    panda.body.collides([pandaCollisionGroup, playerCollisionGroup], hitPanda, this);
+        //panda collides against self then call hitPanda callback
+    panda.body.collides(pandaCollisionGroup, hitPanda, this);
+    //panda collides against ship
+    panda.body.collides(playerCollisionGroup);
          }
 
 }
