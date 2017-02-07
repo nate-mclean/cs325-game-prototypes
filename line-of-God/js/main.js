@@ -92,7 +92,7 @@ function create() {
 
     //  The ship will collide with the pandas, and when it strikes one the hitPanda callback will fire, causing it to alpha out a bit
     //  When pandas collide with each other, nothing happens to them.
-    ship.body.collides(pandaCollisionGroup, hitPanda, this);
+    ship.body.collides(pandaCollisionGroup);
 
     game.camera.follow(ship);
 
@@ -169,7 +169,7 @@ function update() {
         //  Pandas will collide against themselves and the player
         //  If you don't set this they'll not collide with anything.
         //  The first parameter is either an array or a single collision group.
-    panda.body.collides([pandaCollisionGroup, playerCollisionGroup]);
+    panda.body.collides([pandaCollisionGroup, playerCollisionGroup], hitPanda, this);
          }
 
 }
