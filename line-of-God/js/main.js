@@ -135,17 +135,17 @@ function update() {
         ship.body.moveDown(ship.body.velocity.y + 5);
     }
 
-/*
-    if (!game.camera.atLimit.x)
+
+    if (game.camera.atLimit.x)
     {
-        starfield.tilePosition.x += (ship.body.velocity.x * 16) * game.time.physicsElapsed;
+        ship.body.setZeroVelocity();
     }
 
-    if (!game.camera.atLimit.y)
+    if (game.camera.atLimit.y)
     {
-        starfield.tilePosition.y += (ship.body.velocity.y * 16) * game.time.physicsElapsed;
+        ship.body.setZeroVelocity();
     }
-    */
+ 
     
     //spawn pandas randomly 1 in 100 chance
 
