@@ -218,7 +218,7 @@ function update() {
     
     //spawn pandas randomly 1 in 100 chance
 
-    if((Math.random()*100) > 98){
+    if((Math.random()*100) > 99){
      var panda = pandas.create(-10, game.world.randomY, 'panda');
      panda.body.setRectangle(40, 40);
      panda.body.velocity.x = Math.floor(Math.random()*150)+150; //150 to 300 x vel
