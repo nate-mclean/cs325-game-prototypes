@@ -13,7 +13,7 @@ window.onload = function() {
     
     "use strict";
     
-    var game = new Phaser.Game( 1000, 600, Phaser.AUTO, 'game', { preload: preload, create: create, update: update } );
+    var game = new Phaser.Game( 800, 600, Phaser.AUTO, 'game', { preload: preload, create: create, update: update } );
     
     function preload() {
 
@@ -49,7 +49,7 @@ function create() {
     //  (which we do) - what this does is adjust the bounds to use its own collision group.
     //game.physics.p2.updateBoundsCollisionGroup();
 
-    starfield = game.add.tileSprite(0, 0, 1200, 1000, 'stars');
+    starfield = game.add.tileSprite(0, 0, 800, 600, 'stars');
     starfield.fixedToCamera = true;
 
     pandas = game.add.group();
