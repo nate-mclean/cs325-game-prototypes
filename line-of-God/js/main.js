@@ -141,12 +141,12 @@ function update() {
         starfield.tilePosition.y += (ship.body.velocity.y * 16) * game.time.physicsElapsed;
     }
     
-    //spawn pandas randomly 1 in 40 chance
+    //spawn pandas randomly 1 in 300 chance
 
-    if(Math.random()*200 > 195){
+    if((Math.random()*300) > 299){
      var panda = pandas.create(-10, game.world.randomY, 'panda');
      panda.body.setRectangle(40, 40);
-     panda.body.velocity.x = Math.floor(Math.random()*200)+100; //100 to 300 x vel
+     panda.body.velocity.x = Math.floor(Math.random()*100)+50; //50 to 100 x vel
      panda.body.velocity.y = Math.floor(Math.random()*200)-100; //-100  to 100 y vel
  
         //  Tell the panda to use the pandaCollisionGroup 
