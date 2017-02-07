@@ -138,12 +138,15 @@ function update() {
 
 
         //keep god in bounds. bounce him back in
-    if (ship.body.x > 890 || ship.body.x < 10)
+    if (ship.body.x > 880 || ship.body.x < 20)
     {
+        if(ship.body.x < 20 )
+            ship.body.x = 21;
+        
         ship.body.velocity.x = -1 * ship.body.velocity.x;
     }
 
-    if (ship.body.y > 490 || ship.body.y < 10)
+    if (ship.body.y > 480 || ship.body.y < 20)
     {
         ship.body.velocity.y = -1 * ship.body.velocity.y;
     }
