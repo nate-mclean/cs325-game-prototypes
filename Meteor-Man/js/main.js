@@ -19,7 +19,7 @@ window.onload = function() {
 
     game.load.image('stars', 'assets/stars.jpg');
     game.load.image('ship', 'assets/god.png', 32, 32);
-    game.load.image('panda', 'assets/asteroid.png');
+    game.load.image('asteroid', 'assets/asteroid.png');
     game.load.image('explosion', 'assets/explosion.png');
     game.load.image('explosion2', 'assets/explosion2.png');
     game.load.image('sweet', 'assets/sprites/spinObj_06.png');
@@ -30,14 +30,14 @@ window.onload = function() {
 var ship;
 var starfield;
 var cursors;
-var pandas;
+var asteroids;
 var earth;
 var explosions;
 var explosionarray = [];
 
 //collisions
 var playerCollisionGroup;
-var pandaCollisionGroup;
+var asteroidCollisionGroup;
 var earthCollisionGroup;
 
 //text
@@ -52,29 +52,27 @@ var finalscore=0;
 function create() {
 
         
+        //pHYSICS ENGINE!
     //  Enable P2
     game.physics.startSystem(Phaser.Physics.P2JS);
-
     //  Turn on impact events for the world, without this we get no collision callbacks
     game.physics.p2.setImpactEvents(true);
-
     game.physics.p2.restitution = 0.8;
 
-    //  Create our collision groups. One for the player, one for the pandas
+    //  Create our collision groups. Player, asteroids, earth
     playerCollisionGroup = game.physics.p2.createCollisionGroup();
-    pandaCollisionGroup = game.physics.p2.createCollisionGroup();
+    asteroidCollisionGroup = game.physics.p2.createCollisionGroup();
     earthCollisionGroup = game.physics.p2.createCollisionGroup();
+    
 
-    //  This part is vital if you want the objects with their own collision groups to still collide with the world bounds
-    //  (which we do) - what this does is adjust the bounds to use its own collision group.
-    //game.physics.p2.updateBoundsCollisionGroup();
-
+    //ADD background
     starfield = game.add.tileSprite(0, 0, 1000, 600, 'stars');
     starfield.fixedToCamera = true;
 
-    pandas = game.add.group();
-    pandas.enableBody = true;
-    pandas.physicsBodyType = Phaser.Physics.P2JS;
+        //asteroid group
+    asteroids = game.add.group();
+    asteroids.enableBody = true;
+    asteroids.physicsBodyType = Phaser.Physics.P2JS;
     
     //add group for explosions
     explosions = game.add.group();
@@ -83,8 +81,9 @@ function create() {
     earth = game.add.tileSprite(1000, 0, 10, 500, 'ship');
     game.physics.p2.enable(earth, false);
     earth.body.setRectangle(50, 1000);
+    //collides with asteroids
     earth.body.setCollisionGroup(earthCollisionGroup);
-    earth.body.collides(pandaCollisionGroup);
+    earth.body.collides(asteroidCollisionGroup);
     earth.body.fixedRotation = true;
     //earthCollisionGroup = game.physics.p2.createCollisionGroup();
 
@@ -98,9 +97,8 @@ function create() {
     //  Set the ships collision group
     ship.body.setCollisionGroup(playerCollisionGroup);
 
-    //  The ship will collide with the pandas, and when it strikes one the hitPanda callback will fire, causing it to alpha out a bit
-    //  When pandas collide with each other, nothing happens to them.
-    ship.body.collides(pandaCollisionGroup);
+    //  ship collides with asteroids
+    ship.body.collides(asteroidCollisionGroup);
 
     game.camera.follow(ship);
 
@@ -118,7 +116,7 @@ function create() {
 }
 
 //asteroid collision
-function hitPanda(body1, body2) {
+function hitAsteroid(body1, body2) {
 
     //show explosion
        var explosion = explosions.create((body1.x + body2.x)/2-200, (body1.y + body2.y)/2-100, 'explosion2');
@@ -141,16 +139,16 @@ function hitEarth(body1, body2) {
         
 //remove some health
     healthnum -= 5;
-    health.setText("Health: "+healthnum);
     body1.x = 2000;
     body1.velocity.x = 100;
 }
 
 function update() {
 
-    //update score
+    //display health and score
         scorenum += 1;
         score.setText("Score: "+scorenum);
+        health.setText("Health: "+healthnum);
     
     //if health goes below 0 end game
         if( healthnum <= 0 ){
@@ -216,27 +214,25 @@ function update() {
     }
  
     
-    //spawn pandas randomly 1 in 100 chance
+    //spawn asteroids randomly ..
 
-    if((Math.random()*100) > 99){
-     var panda = pandas.create(-10, game.world.randomY, 'panda');
-     panda.body.setRectangle(40, 40);
-     panda.body.velocity.x = Math.floor(Math.random()*150)+150; //150 to 300 x vel
-     panda.body.velocity.y = Math.floor(Math.random()*100)-50; //-50  to 50 y vel
+    if((Math.random()*100) > 98 ){
+     var asteroid = asteroids.create(-10, game.world.randomY, 'asteroid');
+     asteroid.body.setRectangle(40, 40);
+     //x velocity grows as more meteors destroyed
+     asteroid.body.velocity.x = Math.floor((Math.random()*150)+120+(explosionarray.length/20)); //50 to 300+ x vel
+     asteroid.body.velocity.y = Math.floor(Math.random()*100)-50; //-50  to 50 y vel
  
-        //  Tell the panda to use the pandaCollisionGroup 
-     panda.body.setCollisionGroup(pandaCollisionGroup);
+        //  Tell the asteroid to use the asteroidCollisionGroup 
+     asteroid.body.setCollisionGroup(asteroidCollisionGroup);
 
-        //  Pandas will collide against themselves and the player
-        //  If you don't set this they'll not collide with anything.
-        //  The first parameter is either an array or a single collision group.
-        //panda collides against self then call hitPanda callback
-    panda.body.collides(pandaCollisionGroup, hitPanda, this);
-    //panda collides against ship
-    panda.body.collides(playerCollisionGroup);
+        //  asteroid will collide against themselves, call hitAsteroid method
+    asteroid.body.collides(asteroidCollisionGroup, hitAsteroid, this);
+    //asteroid collides against ship
+    asteroid.body.collides(playerCollisionGroup);
     
-    //panda collides against earth
-    panda.body.collides(earthCollisionGroup, hitEarth, this);
+    //asteroid collides against earth
+    asteroid.body.collides(earthCollisionGroup, hitEarth, this);
          }
 
 }
