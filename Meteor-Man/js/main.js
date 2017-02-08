@@ -123,11 +123,16 @@ function hitAsteroid(body1, body2) {
        explosionarray.push(explosion);
 
     //remove both bodies from screen
+    //body1 = null;
+    //body2 = null;
+    body1.x = 1000;
+    body2.x = 1000;
     body1.destroy();
-    body2.destroy(); 
+    body2.destroy();
+ 
     
       //add to score
-      scorenum += 250;  
+      scorenum += 1000;  
 }
 //earth collision
 function hitEarth(body1, body2) {
@@ -136,8 +141,10 @@ function hitEarth(body1, body2) {
         explosionarray.push(explosion);
         
 //remove some health
-    healthnum -= 5;
+    healthnum -= 10;
+    //body1.alpha = 0;
     body1.destroy();
+    //body1.alpha = 0;
 }
 
 function update() {
