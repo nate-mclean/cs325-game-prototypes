@@ -111,7 +111,7 @@ music = game.add.audio('song');
     
     //health
         health = game.add.text(550, 30, "up or down arrowkeys to fly", { font: "30px Arial", fill: "#ff0044", align: "center" });
-        info = game.add.text(700, 80, "Goal: 1000m", { font: "22px Arial", fill: "#ff0044", align: "center" });
+        info = game.add.text(700, 80, "Goal: 2000m", { font: "22px Arial", fill: "#ff0044", align: "center" });
         //healthnum = 100;
     //score
         score = game.add.text(50, 30, "Score: 0", { font: "30px Arial", fill: "#ff0044", align: "center" });
@@ -148,7 +148,7 @@ function update() {
        // health.setText(": "+healthnum);
        
        //won game
-       if(scorenum > 1000){
+       if(scorenum > 2000){
             score.setText(" ");
             health.setText(" ");
             info.setText(" ");
@@ -161,18 +161,18 @@ function update() {
         
         //remove old drones and trees
         drones.forEach(function(item) {
- if(item.body.x > 1000)
+ if(item.body.x > 1100)
  item.destroy();
  
 }, this);
         asteroids.forEach(function(item) {
- if(item.body.x > 1000)
+ if(item.body.x > 1100)
  item.destroy();
  
 }, this);
 
 clouds.forEach(function(item) {
- if(item.body.x > 1000)
+ if(item.body.x > 1100)
  item.destroy();
  
 }, this);
@@ -233,7 +233,7 @@ clouds.forEach(function(item) {
          }
          
     //spawn different trees randomly ..
-    if((Math.random()*200) > 199 && scorenum < 1000){
+    if((Math.random()*200) > 199 && scorenum < 2000){
         //tree or house
         if(Math.random() > .5) {
      var asteroid = asteroids.create(0, 375, 'asteroid');
@@ -257,7 +257,7 @@ clouds.forEach(function(item) {
  
          }
          //spawn drones randomly
-    if((Math.random()*200) > 198 && scorenum < 1000){
+    if((Math.random()*200) > 198 && scorenum < 2000){
      var drone = drones.create(0, Math.floor((Math.random()*250)+50), 'drone');
       drone.animations.add('fly');
 
