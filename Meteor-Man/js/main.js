@@ -125,8 +125,8 @@ function hitAsteroid(body1, body2) {
     //remove both bodies from screen
     //body1 = null;
     //body2 = null;
-    body1.x = 1000;
-    body2.x = 1000;
+    //body1.x = 1000;
+    //body2.x = 1000;
     body1.destroy();
     body2.destroy();
  
