@@ -166,7 +166,7 @@ function update() {
  
 }, this);
         asteroids.forEach(function(item) {
- if(item.body.x > 1100)
+ if(item.body.x > 1300)
  item.destroy();
  
 }, this);
@@ -226,7 +226,7 @@ clouds.forEach(function(item) {
     
              //spawn clouds randomly (non collision)
             if((Math.random()*200) > 195){
-     var cloud = clouds.create(-100, Math.floor((Math.random()*300)+50), 'cloud');
+     var cloud = clouds.create(-200, Math.floor((Math.random()*300)+50), 'cloud');
      //x velocity grows as more meteors destroyed
      cloud.body.velocity.x = Math.floor(500 + scorenum/5); //50 to 300+ x vel
      //asteroid.body.velocity.y = Math.floor(Math.random()*200)-50; //-50  to 50 y vel
@@ -236,11 +236,11 @@ clouds.forEach(function(item) {
     if((Math.random()*200) > 199 && scorenum < 2000){
         //tree or house
         if(Math.random() > .5) {
-     var asteroid = asteroids.create(0, 375, 'asteroid');
+     var asteroid = asteroids.create(-200, 375, 'asteroid');
      asteroid.body.setRectangle(100, 350);
      }
      else{
-         var asteroid = asteroids.create(0, 420, 'house');
+         var asteroid = asteroids.create(-200, 420, 'house');
          asteroid.body.setRectangle(100, 100);
          }
      //x velocity grows as more meteors destroyed
@@ -258,7 +258,7 @@ clouds.forEach(function(item) {
          }
          //spawn drones randomly
     if((Math.random()*200) > 198 && scorenum < 2000){
-     var drone = drones.create(0, Math.floor((Math.random()*250)+50), 'drone');
+     var drone = drones.create(-100, Math.floor((Math.random()*250)+50), 'drone');
       drone.animations.add('fly');
 
       drone.animations.play('fly', 10, true);
