@@ -24,7 +24,7 @@ window.onload = function() {
     game.load.image('ship', 'assets/god.png', 32, 32);
     game.load.image('asteroid', 'assets/tree.png');
     game.load.image('house', 'assets/house.png');    
-    game.load.audio('song', 'assets/song.mp3');
+    game.load.audio('song', ['assets/song.mp3','assets/song.ogg']);
 
 }
 //music
@@ -49,6 +49,7 @@ var score;
 var scorenum;
 var gameover;
 var finalscore=0;
+var info;
 
 
 function create() {
@@ -109,7 +110,8 @@ music = game.add.audio('song');
     cursors = game.input.keyboard.createCursorKeys();
     
     //health
-        health = game.add.text(600, 30, "Press up to fly   Goal: 1000m", { font: "30px Arial", fill: "#ff0044", align: "center" });
+        health = game.add.text(550, 30, "up or down arrowkeys to fly", { font: "30px Arial", fill: "#ff0044", align: "center" });
+        info = game.add.text(700, 80, "Goal: 1000m", { font: "22px Arial", fill: "#ff0044", align: "center" });
         //healthnum = 100;
     //score
         score = game.add.text(50, 30, "Score: 0", { font: "30px Arial", fill: "#ff0044", align: "center" });
@@ -125,6 +127,8 @@ function hitPlayer(body1, body2) {
     
             score.setText(" ");
             health.setText(" ");
+            info.setText(" ");
+
             if(finalscore === 0)
             finalscore = scorenum;
             gameover.setText("GAME OVER \nscore: "+finalscore+"m");
@@ -135,6 +139,9 @@ function hitPlayer(body1, body2) {
 
 function update() {
 
+    //keep birds / trees in front
+    game.world.bringToTop(drones);
+    game.world.bringToTop(asteroids);
     //display health and score
         scorenum += 1;
         score.setText("Distance: "+scorenum+"m");
@@ -144,6 +151,7 @@ function update() {
        if(scorenum > 1000){
             score.setText(" ");
             health.setText(" ");
+            info.setText(" ");
             if(finalscore === 0)
             finalscore = scorenum;
             gameover.setText("You win!!");
@@ -216,8 +224,15 @@ clouds.forEach(function(item) {
     }
  
     
-    //spawn trees/ houses randomly ..
-
+             //spawn clouds randomly (non collision)
+            if((Math.random()*200) > 195){
+     var cloud = clouds.create(-100, Math.floor((Math.random()*300)+50), 'cloud');
+     //x velocity grows as more meteors destroyed
+     cloud.body.velocity.x = Math.floor(500 + scorenum/5); //50 to 300+ x vel
+     //asteroid.body.velocity.y = Math.floor(Math.random()*200)-50; //-50  to 50 y vel
+         }
+         
+    //spawn different trees randomly ..
     if((Math.random()*200) > 199 && scorenum < 1000){
         //tree or house
         if(Math.random() > .5) {
@@ -250,6 +265,7 @@ clouds.forEach(function(item) {
      drone.body.setRectangle(59, 50);
      //x velocity grows as more meteors destroyed
      drone.body.velocity.x = Math.floor(500 + scorenum/5); //50 to 300+ x vel
+     drone.body.velocity.y = Math.floor(60 - Math.random()*120); //50 to 300+ x vel
      //asteroid.body.velocity.y = Math.floor(Math.random()*200)-50; //-50  to 50 y vel
      
  
@@ -262,14 +278,7 @@ clouds.forEach(function(item) {
     drone.body.collides(playerCollisionGroup, hitPlayer, this);
          }
          
-         //spawn clouds randomly (non collision)
-            if((Math.random()*200) > 195){
-     var cloud = clouds.create(-100, Math.floor((Math.random()*300)+50), 'cloud');
-     //x velocity grows as more meteors destroyed
-     cloud.body.velocity.x = Math.floor(500 + scorenum/5); //50 to 300+ x vel
-     //asteroid.body.velocity.y = Math.floor(Math.random()*200)-50; //-50  to 50 y vel
 
-         }
 }
 
 };
