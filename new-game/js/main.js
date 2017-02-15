@@ -30,6 +30,8 @@ window.onload = function() {
 //music
 var music;
 
+//game state
+var state = false;
 //sprites
 var ship;
 var starfield;
@@ -48,9 +50,12 @@ var health;
 var score;
 var scorenum;
 var gameover;
+var gameoversub;
 var finalscore=0;
 var info;
 
+//restrart button
+var key1;
 
 function create() {
 
@@ -59,6 +64,10 @@ music = game.add.audio('song');
 
     music.play();
         
+        //restart button 
+            key1 = game.input.keyboard.addKey(Phaser.Keyboard.N);
+    key1.onDown.add(restart, this);
+    
         //pHYSICS ENGINE!
     //  Enable P2
     game.physics.startSystem(Phaser.Physics.P2JS);
@@ -90,7 +99,7 @@ music = game.add.audio('song');
     
     
     //  Create our ship sprite
-    ship = game.add.sprite(600, 300, 'bird');
+    ship = game.add.sprite(600, 200, 'bird');
      ship.animations.add('fly');
 
     ship.animations.play('fly', 10, true);
@@ -117,14 +126,15 @@ music = game.add.audio('song');
         score = game.add.text(50, 30, "Score: 0", { font: "30px Arial", fill: "#ff0044", align: "center" });
         scorenum = 0;
      //game over
-        gameover = game.add.text(200, 100, "", { font: "75px Arial", fill: "#ff0044", align: "center" });
-    
+        gameover = game.add.text(300, 100, "", { font: "75px Arial", fill: "#ff0044", align: "center" });
+        gameoversub = game.add.text(600, 300, "", { font: "30px Arial", fill: "#ff0044", align: "center" });
 }
 
 
 //player colission
 function hitPlayer(body1, body2) {
     
+    state = false;
             score.setText(" ");
             health.setText(" ");
             info.setText(" ");
@@ -132,9 +142,62 @@ function hitPlayer(body1, body2) {
             if(finalscore === 0)
             finalscore = scorenum;
             gameover.setText("GAME OVER \nscore: "+finalscore+"m");
+            gameoversub.setText("press N to play again");
+            body1.velocity.x=0;
+            body2.velocity.x=0;
+            body1.velocity.y=0;
+            body2.velocity.y=0;
             
-            body1.destroy();
-            body2.destroy();
+            //freeze world
+        drones.forEach(function(item) {
+ item.body.velocity.x=0;
+ 
+}, this);
+        asteroids.forEach(function(item) {
+ item.body.velocity.x=0;
+ 
+}, this);
+
+clouds.forEach(function(item) {
+ item.body.velocity.x=0;
+ 
+}, this);
+            
+}
+
+//press restart button
+function  restart () {
+    
+state = true;
+
+    gameover.setText("");
+    gameoversub.setText("");
+    finalscore = 0;
+    scorenum=0;
+    ship.body.x = 600;
+    ship.body.y = 200;
+    ship.body.velocity.x=0;
+    ship.body.velocity.y=0;
+    ship.visible = true;
+
+    
+    var i;
+            //remove old drones and trees
+            for(i=0 ; i<5 ; i++) {
+        drones.forEach(function(item) {
+ item.destroy();
+ 
+}, this);
+        asteroids.forEach(function(item) {
+ item.destroy();
+ 
+}, this);
+
+clouds.forEach(function(item) {
+ item.destroy();
+ 
+}, this);
+}
 }
 
 function update() {
@@ -142,10 +205,6 @@ function update() {
     //keep birds / trees in front
     game.world.bringToTop(drones);
     game.world.bringToTop(asteroids);
-    //display health and score
-        scorenum += 1;
-        score.setText("Distance: "+scorenum+"m");
-       // health.setText(": "+healthnum);
        
        //won game
        if(scorenum > 2000){
@@ -154,30 +213,23 @@ function update() {
             info.setText(" ");
             if(finalscore === 0)
             finalscore = scorenum;
-            gameover.setText("You win!!");
+            gameover.setText("You win!! ");
+          gameoversub.setText("press N for new game");
 
 }
             
-        
-        //remove old drones and trees
-        drones.forEach(function(item) {
- if(item.body.x > 1100)
- item.destroy();
- 
-}, this);
-        asteroids.forEach(function(item) {
- if(item.body.x > 1300)
- item.destroy();
- 
-}, this);
+      if(state === false) {
+          gameoversub.setText("press N for new game");
+            }  
 
-clouds.forEach(function(item) {
- if(item.body.x > 1100)
- item.destroy();
- 
-}, this);
 
-        //bird movement!!!
+ 
+    if(state === true){
+          //display health and score
+        scorenum += 1;
+       score.setText("Distance: "+scorenum+"m");
+        gameoversub.setText("");
+                //bird movement!!!
         //gravity
          ship.body.velocity.y += 10;
             if (cursors.up.isDown)
@@ -191,18 +243,6 @@ clouds.forEach(function(item) {
         ship.body.moveDown(ship.body.velocity.y + 5);
     }
 
-    /*    
-    if (cursors.left.isDown)
-    {
-        ship.body.velocity.x -= 10;
-        ship.body.moveLeft(-ship.body.velocity.x + 5);
-    }
-    else if (cursors.right.isDown)
-    {
-        ship.body.velocity.x += 10;
-        ship.body.moveRight(ship.body.velocity.x + 5);
-    }
-*/
 
 
 
@@ -222,8 +262,6 @@ clouds.forEach(function(item) {
         
         ship.body.velocity.y = -1 * ship.body.velocity.y;
     }
- 
-    
              //spawn clouds randomly (non collision)
             if((Math.random()*200) > 195){
      var cloud = clouds.create(-200, Math.floor((Math.random()*300)+50), 'cloud');
@@ -278,7 +316,28 @@ clouds.forEach(function(item) {
     drone.body.collides(playerCollisionGroup, hitPlayer, this);
          }
          
+                 //remove old drones and trees
+        
+        drones.forEach(function(item) {
+ if(item.body.x > 1100)
+ item.destroy();
+ 
+}, this);
+        asteroids.forEach(function(item) {
+ if(item.body.x > 1300)
+ item.destroy();
+ 
+}, this);
+
+clouds.forEach(function(item) {
+ if(item.body.x > 1100)
+ item.destroy();
+ 
+}, this);
+         }
+         
 
 }
+
 
 };
