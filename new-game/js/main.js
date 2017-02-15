@@ -63,6 +63,7 @@ function create() {
 music = game.add.audio('song');
 
     music.play();
+    music.loop = true;
         
         //restart button 
             key1 = game.input.keyboard.addKey(Phaser.Keyboard.N);
