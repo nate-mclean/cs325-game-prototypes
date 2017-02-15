@@ -170,6 +170,7 @@ clouds.forEach(function(item) {
 function  restart () {
     
 state = true;
+    music.play();
 
     gameover.setText("");
     gameoversub.setText("");
