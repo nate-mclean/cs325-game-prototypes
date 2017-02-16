@@ -24,7 +24,9 @@ window.onload = function() {
     game.load.image('ship', 'assets/god.png', 32, 32);
     game.load.image('asteroid', 'assets/tree.png');
     game.load.image('house', 'assets/house.png');    
+    game.load.image('win', 'assets/robin.jpg');
     game.load.audio('song', ['assets/song.mp3','assets/song.ogg']);
+
 
 }
 //music
@@ -39,6 +41,7 @@ var cursors;
 var asteroids;
 var drones;
 var clouds;
+var win;
 
 
 //collisions
@@ -65,6 +68,8 @@ music = game.add.audio('song');
         //restart button 
             key1 = game.input.keyboard.addKey(Phaser.Keyboard.N);
     key1.onDown.add(restart, this);
+
+
     
         //pHYSICS ENGINE!
     //  Enable P2
@@ -81,6 +86,10 @@ music = game.add.audio('song');
     //ADD background
     starfield = game.add.tileSprite(0, 0, 1000, 600, 'stars');
     starfield.fixedToCamera = true;
+    
+        //win image
+    win = game.add.sprite(0, 0, 'win');
+       win.alpha = .15;
 
         //asteroid group
     asteroids = game.add.group();
@@ -207,15 +216,16 @@ function update() {
        
        //won game
        if(scorenum > 2000){
+           state = false;
+           //show win image
+            win.alpha = 1;
             score.setText(" ");
             health.setText(" ");
             info.setText(" ");
             if(finalscore === 0)
             finalscore = scorenum;
             gameover.setText("You win!! ");
-          gameoversub.setText("press N for new game");
-
-}
+            }
             
       if(state === false) {
           gameoversub.setText("press N for new game");
@@ -224,8 +234,9 @@ function update() {
 
  
     if(state === true){
-          //display health and score
+          //display score
         scorenum += 1;
+           win.alpha = 0;
        score.setText("Distance: "+scorenum+"m");
         gameoversub.setText("");
                 //bird movement!!!
@@ -272,16 +283,16 @@ function update() {
     //spawn different trees randomly ..
     if((Math.random()*200) > 199 && scorenum < 2000){
         //tree or house
-        if(Math.random() > .5) {
+        if(Math.random() > .8) {
      var asteroid = asteroids.create(-200, 375, 'asteroid');
-     asteroid.body.setRectangle(100, 350);
+     asteroid.body.setRectangle(100, 300);
      }
      else{
          var asteroid = asteroids.create(-200, 420, 'house');
-         asteroid.body.setRectangle(100, 100);
+         asteroid.body.setRectangle(100, 120);
          }
      //x velocity grows as more meteors destroyed
-     asteroid.body.velocity.x = Math.floor(500 + scorenum/5); //50 to 300+ x vel
+     asteroid.body.velocity.x = Math.floor(500 + scorenum/6); //50 to 300+ x vel
      //asteroid.body.velocity.y = Math.floor(Math.random()*200)-50; //-50  to 50 y vel
  
         //  Tell the asteroid to use the asteroidCollisionGroup 
@@ -294,14 +305,14 @@ function update() {
  
          }
          //spawn drones randomly
-    if((Math.random()*200) > 198 && scorenum < 2000){
+    if((Math.random()*200) > 199 && scorenum < 2000){
      var drone = drones.create(-100, Math.floor((Math.random()*250)+50), 'drone');
       drone.animations.add('fly');
 
       drone.animations.play('fly', 10, true);
      drone.body.setRectangle(59, 50);
      //x velocity grows as more meteors destroyed
-     drone.body.velocity.x = Math.floor(500 + scorenum/5); //50 to 300+ x vel
+     drone.body.velocity.x = Math.floor(500 + scorenum/6); //50 to 300+ x vel
      drone.body.velocity.y = Math.floor(60 - Math.random()*120); //50 to 300+ x vel
      //asteroid.body.velocity.y = Math.floor(Math.random()*200)-50; //-50  to 50 y vel
      
