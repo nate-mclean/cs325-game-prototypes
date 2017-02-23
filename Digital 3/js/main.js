@@ -68,7 +68,7 @@ music = game.add.audio('song');
             
     //debug text
     debug = game.add.text(0, 30, "", { font: "20px Arial", fill: "#ff0044", align: "center" });
-
+    debug.setText("click to move");
 
 }
 
