@@ -137,9 +137,7 @@ function update() {
                 }
                           //move around world following mouse location
             else{
-                if(state != "map")
-                    world.body.velocity.setTo(0, 0);
-                else if(!shoes)
+                if(!shoes)
                     world.body.velocity.setTo(-1*(game.input.x-300), -1*(game.input.y-300));
                 else if(shoes)
                     world.body.velocity.setTo(-2*(game.input.x-300), -2*(game.input.y-300));
@@ -151,6 +149,9 @@ function update() {
         }
     
     }
+    //kill vel if not on map
+    if(state != "map")
+        world.body.velocity.setTo(0, 0);
     
     //go into house 1, home
     if(state === "home") {
@@ -326,7 +327,7 @@ function listener2 () {
             if(count === 5)
     debug.setText("Old woman: Thank you whoever you are");
               if(count === 6){
-    debug.setText("** Aquired Money**");  
+    debug.setText("** Aquired Money **");  
     healstone++;
     money++;
     }
@@ -360,7 +361,7 @@ function listener3 () {
     if(count === 4)
     debug.setText("** You pick up the healing stone **");
     if(count === 5){
-    debug.setText("Priest: Ah, taken immediately. Go in peace.");
+    debug.setText("** Healing stone aquired **");
     healstone++;
     }
     }
