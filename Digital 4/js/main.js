@@ -18,8 +18,8 @@ window.onload = function() {
 function preload() {
 
     this.load.image('plantTreeButton', 'assets/plantTreeButton.png');
-    this.load.image('harvestFruitButton', 'assets/harvestFruitButton.png');
-    this.load.image('increaseRegulationsButton', 'assets/increaseRegulationsButton.png');
+    this.load.image('harvestFruitButton', 'assets/HarvestFruitButton.png');
+    this.load.image('increaseRegulationsButton', 'assets/IncreaseRegulationsButton.png');
     this.load.image('nextDayButton', 'assets/nextDayButton.png');
     this.load.image('newgameButton', 'assets/newgameButton.png');
     this.load.image('bkg', 'assets/bkg.jpg');
