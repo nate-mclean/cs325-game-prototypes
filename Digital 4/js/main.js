@@ -110,7 +110,7 @@ function update() {
     //update text fields
         money.setText("Money: $" + moneyCount);
         year.setText("Year " + yearCount);
-        if(yearCount > 1 && gameover === false)
+        if(trees.length > 0 && gameover === false)
         endgame.setText("");
     //endgame, win
         if(bulldozerFreq <= 0) {
