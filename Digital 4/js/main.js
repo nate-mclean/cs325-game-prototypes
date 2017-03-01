@@ -46,6 +46,7 @@ var money;
 var year;
 var endgame;
 var dozers;
+var treeC;
 
 //text data
 var moneyCount = 70;
@@ -109,8 +110,9 @@ newgameB.visible = false;
     money.setText("Money: $" + moneyCount);
     year = game.add.text(420, 30, "", { font: "60px Arial", fill: "#000000", align: "center" });
     year.setText("Year " + yearCount);
-    endgame = game.add.text(330, 200, "Increase regulations to \nstop the bulldozers\nand save the forest!!", { font: "60px Arial", fill: "#000000", align: "center" });
-    dozers = game.add.text(35, 520, "", { font: "30px Arial", fill: "#000000", align: "center" });
+    endgame = game.add.text(330, 200, "Increase regulations to \nenable rapid tree growth,\n grow 25 trees \nto save the forest!!", { font: "60px Arial", fill: "#000000", align: "center" });
+    dozers = game.add.text(35, 550, "", { font: "25px Arial", fill: "#000000", align: "center" });
+    treeC = game.add.text(55, 510, "", { font: "30px Arial", fill: "#000000", align: "center" });
     
 //create 2 trees initially
 initTrees();
@@ -122,9 +124,10 @@ function update() {
         money.setText("Money: $" + moneyCount);
         year.setText("Year " + yearCount);
         dozers.setText("Bulldozers left: " + bulldozerFreq);
+        treeC.setText("Trees: " + trees.length);
 
     //endgame, win
-        if(bulldozerFreq <= 0) {
+        if(trees.length >= 25) {
             endgame.setText("You saved \nthe forest!");
             gameover = true;
             newgameB.visible = true;
@@ -225,10 +228,13 @@ function harvestButton () {
 function regButton () {
     
     //if enough money, remove money and decrese bulldozer frequency
-   if(moneyCount >= 100){
+   if(moneyCount >= 100 && bulldozerFreq > 1){
         moneyCount -= 100;  
         bulldozerFreq -= 1;
+        if(bulldozerFreq === 1)
+            regB.alpha = .2; 
     }
+            
 
 }
 
@@ -243,7 +249,7 @@ function yearButton () {
     for(var i=0; i< bulldozerFreq ; i++) {
          var bulldozer = bulldozers.create(1000, Math.floor((Math.random()*450)+120), 'bulldozer');
          bulldozer.body.setRectangle(50, 50);
-         bulldozer.body.velocity.x = -1 * Math.floor(300 + Math.random()*200);
+         bulldozer.body.velocity.x = -1 * Math.floor(400 + Math.random()*200);
          bulldozer.body.velocity.y =  30- Math.floor(Math.random()*60);
         bulldozer.body.setCollisionGroup(bulldozerCollisionGroup);
         
@@ -254,7 +260,7 @@ function yearButton () {
         
     //fruit some trees
     trees.forEach(function(item) {
-        if(Math.random() > .3){
+        if(Math.random() > .2){
         item.loadTexture('treeHarvest', 0, false);
         //fruit++;
         item.fruit = true;
@@ -279,6 +285,7 @@ function newgameButton () {
         treeB.visible=true;
         harvestB.visible=true;
         regB.visible=true;
+        regB.alpha = 1;
         yearB.visible=true;
         //init trees
         initTrees();
