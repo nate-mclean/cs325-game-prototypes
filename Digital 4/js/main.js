@@ -121,8 +121,7 @@ function update() {
     //update text fields
         money.setText("Money: $" + moneyCount);
         year.setText("Year " + yearCount);
-        if(trees.length > 0 && gameover === false)
-        endgame.setText("");
+
     //endgame, win
         if(bulldozerFreq <= 0) {
             endgame.setText("You saved \nthe forest!");
@@ -187,6 +186,8 @@ function update() {
 
 //tree button click
 function treeButton () {
+    //clear intro text
+    endgame.setText("");
     //if enough money
     if(moneyCount >= 10) {
     //create tree in tree group
@@ -234,6 +235,8 @@ function regButton () {
 
 //next year button click
 function yearButton () {
+    //clear intro text
+    endgame.setText("");
     //create bulldozers
     
     for(var i=0; i< bulldozerFreq ; i++) {
