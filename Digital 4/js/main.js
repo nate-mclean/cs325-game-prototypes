@@ -26,6 +26,7 @@ function preload() {
     this.load.image('tree', 'assets/tree.png');
     this.load.image('treeHarvest', "assets/treeHarvest.png");
     this.load.image('bulldozer', 'assets/bulldozer.png');
+    game.load.audio('song', 'assets/song.mp3');
 
 }
 
@@ -63,6 +64,10 @@ var gameover = false;
 
 
 function create() {
+
+//music
+var music = game.add.audio('song');
+    music.play();
 
       //pHYSICS ENGINE!
     //  Enable P2
@@ -288,6 +293,7 @@ function  clearAll () {
     }
 }
 
+//initialize 5 trees
     function initTrees() {
             for(var i = 0; i < 5; i++){
         var tree = trees.create((350 + Math.random()*640), (120 + Math.random()*420), 'tree');
