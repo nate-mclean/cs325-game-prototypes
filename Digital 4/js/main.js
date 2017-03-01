@@ -286,9 +286,10 @@ function  clearAll () {
         item.destroy();
     }, this);
     }
-    }
+}
+
     function initTrees() {
-            for(var i = 0; i < 2; i++){
+            for(var i = 0; i < 5; i++){
         var tree = trees.create((350 + Math.random()*640), (120 + Math.random()*420), 'tree');
          tree.body.setRectangle(50, 50);
          //fruit boolean
@@ -299,6 +300,7 @@ function  clearAll () {
     tree.body.collides(bulldozerCollisionGroup, hitPlayer2, this);
     }
 }
+
 //bulldozer tree collision
 function hitPlayer(body1, body2) {
 body2.x = 5000; 
