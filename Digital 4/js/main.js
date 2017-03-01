@@ -45,6 +45,7 @@ var bkg;
 var money;
 var year;
 var endgame;
+var dozers;
 
 //text data
 var moneyCount = 70;
@@ -109,7 +110,8 @@ newgameB.visible = false;
     year = game.add.text(420, 30, "", { font: "60px Arial", fill: "#000000", align: "center" });
     year.setText("Year " + yearCount);
     endgame = game.add.text(330, 200, "Increase regulations to \nstop the bulldozers\nand save the forest!!", { font: "60px Arial", fill: "#000000", align: "center" });
-
+    dozers = game.add.text(35, 520, "", { font: "30px Arial", fill: "#000000", align: "center" });
+    
 //create 2 trees initially
 initTrees();
 
@@ -119,6 +121,7 @@ function update() {
     //update text fields
         money.setText("Money: $" + moneyCount);
         year.setText("Year " + yearCount);
+        dozers.setText("Bulldozers left: " + bulldozerFreq);
 
     //endgame, win
         if(bulldozerFreq <= 0) {
