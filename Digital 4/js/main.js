@@ -104,6 +104,17 @@ newgameB.visible = false;
     year.setText("Year " + yearCount);
     endgame = game.add.text(330, 200, "Increase regulations to \nstop the bulldozers\nand save the forest!!", { font: "60px Arial", fill: "#000000", align: "center" });
 
+//create 2 trees initially
+    for(var i = 0; i < 2; i++){
+        var tree = trees.create((350 + Math.random()*640), (120 + Math.random()*420), 'tree');
+         tree.body.setRectangle(50, 50);
+         //fruit boolean
+         tree.fruit =false;
+
+     tree.body.setCollisionGroup(treeCollisionGroup);
+     
+    tree.body.collides(bulldozerCollisionGroup, hitPlayer2, this);
+    }
 }
 
 function update() {
