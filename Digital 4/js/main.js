@@ -105,16 +105,8 @@ newgameB.visible = false;
     endgame = game.add.text(330, 200, "Increase regulations to \nstop the bulldozers\nand save the forest!!", { font: "60px Arial", fill: "#000000", align: "center" });
 
 //create 2 trees initially
-    for(var i = 0; i < 2; i++){
-        var tree = trees.create((350 + Math.random()*640), (120 + Math.random()*420), 'tree');
-         tree.body.setRectangle(50, 50);
-         //fruit boolean
-         tree.fruit =false;
+initTrees();
 
-     tree.body.setCollisionGroup(treeCollisionGroup);
-     
-    tree.body.collides(bulldozerCollisionGroup, hitPlayer2, this);
-    }
 }
 
 function update() {
@@ -275,15 +267,17 @@ function newgameButton () {
     bulldozerFreq=4;
     endgame.setText("");
     //show buttons
-            treeB.visible=true;
-            harvestB.visible=true;
-            regB.visible=true;
-            yearB.visible=true;
+        treeB.visible=true;
+        harvestB.visible=true;
+        regB.visible=true;
+        yearB.visible=true;
+        //init trees
+        initTrees();
     
     }
 
     //clear trees, bulldozers
-    function  clearAll () {
+function  clearAll () {
     for(var i = 0 ; i <10 ; i++){
         trees.forEach(function(item) {
         item.destroy();
@@ -293,6 +287,18 @@ function newgameButton () {
     }, this);
     }
     }
+    function initTrees() {
+            for(var i = 0; i < 2; i++){
+        var tree = trees.create((350 + Math.random()*640), (120 + Math.random()*420), 'tree');
+         tree.body.setRectangle(50, 50);
+         //fruit boolean
+         tree.fruit =false;
+
+     tree.body.setCollisionGroup(treeCollisionGroup);
+     
+    tree.body.collides(bulldozerCollisionGroup, hitPlayer2, this);
+    }
+}
 //bulldozer tree collision
 function hitPlayer(body1, body2) {
 body2.x = 5000; 
