@@ -45,7 +45,7 @@ var year;
 var endgame;
 
 //text data
-var moneyCount = 150;
+var moneyCount = 70;
 var yearCount = 1;
 
 //groups
@@ -254,7 +254,7 @@ function newgameButton () {
     clearAll();
     //reset all values
     newgameB.visible = false;
-    moneyCount = 150;
+    moneyCount = 70;
     yearCount = 1;
     count=0;
     gameover = false;
