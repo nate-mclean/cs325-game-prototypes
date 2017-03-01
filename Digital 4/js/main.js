@@ -26,12 +26,13 @@ function preload() {
     this.load.image('tree', 'assets/tree.png');
     this.load.image('treeHarvest', "assets/treeHarvest.png");
     this.load.image('bulldozer', 'assets/bulldozer.png');
-    game.load.audio('song', 'assets/song.mp3');
+    this.load.audio('song', 'assets/song.mp3');
 
 }
 
 //globals
 
+var music;
 //sprites
 var treeB;
 var harvestB;
@@ -66,7 +67,7 @@ var gameover = false;
 function create() {
 
 //music
-var music = game.add.audio('song');
+    music = game.add.audio('song');
     music.play();
 
       //pHYSICS ENGINE!
