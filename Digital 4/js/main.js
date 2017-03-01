@@ -254,7 +254,7 @@ function yearButton () {
         
     //fruit some trees
     trees.forEach(function(item) {
-        if(Math.random() > .5){
+        if(Math.random() > .3){
         item.loadTexture('treeHarvest', 0, false);
         //fruit++;
         item.fruit = true;
