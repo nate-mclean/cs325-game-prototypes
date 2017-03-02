@@ -125,7 +125,27 @@ function update() {
         year.setText("Year " + yearCount);
         dozers.setText("Bulldozers left: " + bulldozerFreq);
         treeC.setText("Trees: " + trees.length);
-
+        
+    //grey out buttons if unusable
+        if(moneyCount >= 10)
+            treeB.alpha = 1;
+        else
+            treeB.alpha = .2;
+        var fruitC = 0;
+            trees.forEach(function(item) {
+                if(item.fruit === true)
+                    fruitC++;
+            }, this);      
+        if(fruitC > 0)
+            harvestB.alpha = 1;
+        else
+            harvestB.alpha = .2;
+        if(moneyCount >= 100 && bulldozerFreq > 1)
+            regB.alpha = 1;
+        else
+            regB.alpha = .2;
+                
+    
     //endgame, win
         if(trees.length >= 25) {
             endgame.setText("You saved \nthe forest!");
