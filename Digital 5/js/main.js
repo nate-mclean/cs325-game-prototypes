@@ -189,7 +189,6 @@ function update() {
 
     //display health and score
         score.setText("Score: "+scorenum);
-        health.setText("Health: "+healthnum);
     //remove explosions
         var i;
         for (i = 0; i < explosionarray.length; i++) { 
@@ -200,7 +199,7 @@ function update() {
         
           //non playing state
     if(state === 0){ 
-        
+            health.setText("");
             gameover.setText("");
 
         if(healthnum > 0 ) { //new game{
@@ -232,6 +231,7 @@ function update() {
         
             //in game playing state
      if(state === 1)  {  
+            health.setText("Health: "+healthnum);
             newgameB.visible = false;
          //inscrease score
         scorenum += 1;
