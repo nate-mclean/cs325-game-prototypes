@@ -206,8 +206,10 @@ function update() {
             wave.setText("");
             gameover.setText("  Arrow keys to move, \nhit meteors and smash them \n\nstop them from hitting earth");
       }
-        else if ( scorenum < 100000) //game over text
+        else if ( scorenum < 100000){ //game over text
             wave.setText("GAME OVER");
+            score.setText("Wave "+ wavenum + "/10");
+            }
         else{
             wave.setText("You saved Earth!");
             }
