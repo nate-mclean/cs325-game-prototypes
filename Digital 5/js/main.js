@@ -50,6 +50,7 @@ var score;
 var scorenum;
 var gameover;
 var finalscore=0;
+var explosionCount = 0;
 
 //states
 var state = 0;
@@ -153,7 +154,8 @@ function hitAsteroid(body1, body2) {
     body2.velocity.x = 0;
     
       //add to score
-      scorenum += 500;  
+      scorenum += 500; 
+      explosionCount++; 
 }
 //earth collision
 function hitEarth(body1, body2) {
@@ -178,7 +180,7 @@ function newgameButton () {
     healthnum = 100;
     scorenum = 0;
     gameover.setText("");
-    
+    explosionCount = 0;
     //change state 
     state = 1;
 
@@ -194,6 +196,9 @@ function update() {
         for (i = 0; i < explosionarray.length; i++) { 
         if(explosionarray[i].alpha > .01)
             explosionarray[i].alpha -= .01;
+            
+        if(explosionarray[i].alpha === 0)
+            explosionarray.splice(i, 1);
         }
         
         
@@ -223,11 +228,6 @@ function update() {
             //clear asteroids
         asteroids.forEach(function(item) {
         
-           item.destroy(); 
-    }, this);
-                //clear explosions
-        explosions.forEach(function(item) {
-        if(item.alpha === 0)
            item.destroy(); 
     }, this);
             
@@ -318,7 +318,7 @@ function update() {
      
      asteroid.body.setRectangle(70, 70);
      //x velocity grows as more meteors destroyed
-     asteroid.body.velocity.x = Math.floor((Math.random()*150)+120+(explosionarray.length)); //50 to 300+ x vel
+     asteroid.body.velocity.x = Math.floor((Math.random()*150)+120+explosionCount); //50 to 300+ x vel
      asteroid.body.velocity.y = Math.floor(Math.random()*100)-50; //-50  to 50 y vel
  
         //  Tell the asteroid to use the asteroidCollisionGroup 
