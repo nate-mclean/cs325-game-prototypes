@@ -225,6 +225,11 @@ function update() {
         
            item.destroy(); 
     }, this);
+                //clear explosions
+        explosions.forEach(function(item) {
+        if(item.alpha === 0)
+           item.destroy(); 
+    }, this);
             
         newgameB.visible = true;
         newgameB.events.onInputDown.add(newgameButton, this);
@@ -313,7 +318,7 @@ function update() {
      
      asteroid.body.setRectangle(70, 70);
      //x velocity grows as more meteors destroyed
-     asteroid.body.velocity.x = Math.floor((Math.random()*150)+120+(explosionarray.length/20)); //50 to 300+ x vel
+     asteroid.body.velocity.x = Math.floor((Math.random()*150)+120+(explosionarray.length)); //50 to 300+ x vel
      asteroid.body.velocity.y = Math.floor(Math.random()*100)-50; //-50  to 50 y vel
  
         //  Tell the asteroid to use the asteroidCollisionGroup 
