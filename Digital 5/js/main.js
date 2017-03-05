@@ -23,6 +23,7 @@ window.onload = function() {
     game.load.image('explosion', 'assets/explosion.png');
     game.load.image('explosion2', 'assets/explosion2.png');
     game.load.image('newgameB', 'assets/newgameButton.png');
+    game.load.audio('song', 'assets/aug16.mp3');
 
 }
 
@@ -58,6 +59,9 @@ var newgameB;
 
 
 function create() {
+    //music
+    var music = game.add.audio('song');
+    music.play();
 
         
         //pHYSICS ENGINE!
