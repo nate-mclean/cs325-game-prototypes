@@ -20,6 +20,7 @@ window.onload = function() {
     game.load.image('stars', 'assets/stars.jpg');
     game.load.image('ship', 'assets/god.png', 32, 32);
     game.load.spritesheet('asteroid', 'assets/asteroid.png', 128, 128, 4);
+    game.load.spritesheet('healthbar', 'assets/healthbar.png', 200, 100, 10);
     game.load.image('explosion', 'assets/explosion.png');
     game.load.image('explosion2', 'assets/explosion2.png');
     game.load.image('newgameB', 'assets/newgameButton.png');
@@ -44,8 +45,9 @@ var earthCollisionGroup;
 //text
 var wave;
 var wavenum;
-var health;
+var healthbar;
 var healthnum;
+var healthtext;
 var score;
 var scorenum;
 var gameover;
@@ -124,15 +126,16 @@ function create() {
 
     
     //wave 
-        wave = game.add.text(320, 30, "", { font: "50px Arial", fill: "#ff0044", align: "center" });
+        wave = game.add.text(320, 30, "", { font: "50px Arial", fill: "#ffffff", align: "center" });
     //health
-        health = game.add.text(680, 30, "Health: 100", { font: "30px Arial", fill: "#ff0044", align: "center" });
+        healthbar = game.add.sprite(680, 30, 'healthbar' );
+        healthtext =  game.add.text(740, 60, "Health", { font: "25px Arial", fill: "#ffffff", align: "center" });
         healthnum = 100;
     //score
-        score = game.add.text(50, 30, "Score: 0", { font: "30px Arial", fill: "#ff0044", align: "center" });
+        score = game.add.text(50, 30, "Score: 0", { font: "30px Arial", fill: "#ffffff", align: "center" });
         scorenum = 0;
      //game over
-        gameover = game.add.text(200, 50, "", { font: "30px Arial", fill: "#ff0044", align: "center" });
+        gameover = game.add.text(200, 50, "", { font: "30px Arial", fill: "#ffffff", align: "center" });
     
 }
 
@@ -177,6 +180,8 @@ function newgameButton () {
     //clearAll();
     //reset all values
     newgameB.visible = false;
+    healthbar.visible = true;
+    healthtext.setText("Health");
     healthnum = 100;
     scorenum = 0;
     gameover.setText("");
@@ -204,7 +209,8 @@ function update() {
         
           //non playing state
     if(state === 0){ 
-            health.setText("");
+            healthbar.visible = false;
+            healthtext.setText("");
             gameover.setText("");
 
         if(healthnum > 0 ) { //new game{
@@ -238,7 +244,28 @@ function update() {
         
             //in game playing state
      if(state === 1)  {  
-            health.setText("Health: "+healthnum);
+            //set health bar
+            if(healthnum >90)
+            healthbar.frame = 0;
+            else if(healthnum > 80)
+            healthbar.frame = 1;
+            else if(healthnum >70)
+            healthbar.frame = 2;
+            else if(healthnum >60)
+            healthbar.frame = 3;
+            else if(healthnum >50)
+            healthbar.frame = 4;
+            else if(healthnum > 40)
+            healthbar.frame = 5;
+            else if(healthnum >30)
+            healthbar.frame = 6;
+            else if(healthnum >20)
+            healthbar.frame = 7;
+            else if(healthnum >10)
+            healthbar.frame = 8;
+            else if(healthnum >0)
+            healthbar.frame = 9;
+            
             newgameB.visible = false;
          //inscrease score
         scorenum += 1;
@@ -249,7 +276,8 @@ function update() {
     //if health or score above 100000 goes below 0 end game
         if( healthnum <= 0 || scorenum > 100000){
             score.setText(" ");
-            health.setText(" ");
+            healthbar.visible=false;
+            healthtext.setText("");
             healthnum = 0;            
             if(finalscore === 0)
             finalscore = scorenum;
