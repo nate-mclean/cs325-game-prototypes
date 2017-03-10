@@ -290,7 +290,7 @@ function update() {
         earth.body.y=0;
     //remove all asteroid bodies
         asteroids.forEach(function(item) {
-            if(item.x > 2000 || item.x < -300 || item.y > 1000 || item.y < -100)
+            if(item.x > 2000 || item.x < -300 || item.y > 700 || item.y < -50)
                 item.destroy(); 
         }, this);
         
