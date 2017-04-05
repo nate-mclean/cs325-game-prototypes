@@ -24,13 +24,19 @@ function preload() {
     this.load.image('nextbutton', 'assets/nextbutton.png');
     this.load.image('nextdaybutton', 'assets/nextdaybutton.png');
     this.load.image('rollbutton', 'assets/rollbutton.png');
-    this.load.image('newgamebutton', 'assets/newgamebutton.png');
+    this.load.image('newgamebutton', 'assets/newgameButton.png');
     this.load.image('bkg', 'assets/bkg.png');
+   this.load.audio('song', 'assets/song.mp3');
 
 
 }
 
 //globals
+
+//rolling
+var rolltest = false;
+var i = 0;
+
 
 var music;
 //sprites
@@ -165,7 +171,7 @@ dice.visible=false;
     //roll text
     roll = game.add.text(420, 520, "Rolls per turn: "+rollMax, { font: "30px Arial", fill: "#000000", align: "center" });
     rand = game.add.text(650, 450, "", { font: "30px Arial", fill: "#000000", align: "center" });
-    win = game.add.text(350, 330, "", { font: "40px Arial", fill: "#000000", align: "center" });
+    win = game.add.text(350, 330, "upgrade to store 3/3\n                        to win", { font: "40px Arial", fill: "#000000", align: "center" });
     //upgrade text
     upgrade = game.add.text(50, 420, "", { font: "45px Arial", fill: "#000000", align: "center" });
     
@@ -235,6 +241,16 @@ function update() {
         nextB.events.onInputDown.add(nextButton, this);
     //ew game
         newgameB.events.onInputDown.add(newgameButton, this);
+        
+    //roll dice delay
+     if(rolltest === true){
+         i++;
+         if(i>50){
+             rolltest=false;
+             i=0;
+             rolldice();
+             }
+         }
 }
 
 //cat click
@@ -291,20 +307,45 @@ function rollButton () {
     //increment count
     rollBcount++;
     //diceroll animation
+    rolltest = true;
+    dice.visible=true;
+    var roll = dice.animations.add('roll');
+    dice.animations.play('roll', 10, true);
 
     
-    if(rollBcount > rollMax){
+    
+    //remove other buttons if first click
+    if(rollBcount == 1){
+        addBcat.visible=false;
+        removeBcat.visible=false;
+        addBdog.visible=false;
+        removeBdog.visible=false;
+        addBfish.visible=false;
+        removeBfish.visible=false;
+        }
+    }
+    
+    
+
+function rolldice() {
+        dice.animations.stop(null, true);
+        if(rollBcount >= rollMax){
     upgradeB.visible = true;
     rollB.visible =false; 
-    dice.visible=false;
+    roll.setText("");
+    rollhelp();
     }
     else{
-    //get random roll
+    rand.setText("       1=dog\n3=cat\neven=fish");
+        roll.setText("rolls left: "+(rollMax-rollBcount));
+        rollhelp();
+    }
+    }
+function rollhelp() {
+        //get random roll
     var num = Math.floor(Math.random()*6 + 1);
     dice.visible=true;
     dice.frame = num - 1;
-    rand.setText("       1=dog\n3=cat\neven=fish");
-    roll.setText("rolls left: "+(rollMax-rollBcount));
     
     //check if can make money on roll
     if((num==2 || num==4 || num==6) && fishCount>0 ) {
@@ -324,21 +365,10 @@ function rollButton () {
         }
     else
         win.setText("");
-    
-    //remove other buttons if first click
-    if(rollBcount == 1){
-        addBcat.visible=false;
-        removeBcat.visible=false;
-        addBdog.visible=false;
-        removeBdog.visible=false;
-        addBfish.visible=false;
-        removeBfish.visible=false;
-        }
+
     }
-    
-    
-}
 function upgradeButton() {
+        dice.visible=false;
     upgrade.setText("buy one more roll (-$100) \n\n upgrade store (-$500)");
     win.setText("store level " + store + "/3");
     upgradeBroll.visible = true;
