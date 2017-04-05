@@ -245,6 +245,8 @@ function update() {
     //roll dice delay
      if(rolltest === true){
          i++;
+         rollB.alpha = .2;
+         rollB.inputEnabled  = false;
          if(i>50){
              rolltest=false;
              i=0;
@@ -343,6 +345,8 @@ function rolldice() {
     }
 function rollhelp() {
         //get random roll
+        rollB.alpha = 1;
+        rollB.inputEnabled  = true;
     var num = Math.floor(Math.random()*6 + 1);
     dice.visible=true;
     dice.frame = num - 1;
