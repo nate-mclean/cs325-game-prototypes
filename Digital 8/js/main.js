@@ -46,6 +46,8 @@ function preload() {
    this.load.audio('button', 'assets/button1.mp3');
    this.load.audio('upgrade', 'assets/upgrade.mp3');
    this.load.audio('roll', 'assets/roll.mp3');
+   this.load.audio('cash', 'assets/cash.mp3');
+
 
 
 }
@@ -62,6 +64,7 @@ var music;
 var button;
 var upgradesound;
 var rollsound;
+var cash;
 
 //sprites
 var addBcat;
@@ -121,6 +124,7 @@ function create() {
     rollsound = game.add.audio('roll');
     upgradesound = game.add.audio('upgrade');
     button = game.add.audio('button');
+    cash = game.add.audio('cash');
     music.play();
 
       //pHYSICS ENGINE!
@@ -455,6 +459,7 @@ function rollhelp() {
     
     //check if can make money on roll
     if((num==2 || num==4 || num==6) && fishCount>0 ) {
+        cash.play();
         fishCount--;
         moneyCount+=50;
         win.setText("you sold a fish! +$"+50);
@@ -469,6 +474,7 @@ function rollhelp() {
         
         }
     else if(num==3 && catCount>0 ) {
+        cash.play();
         catCount--;
         moneyCount+=100;
         win.setText("you sold a cat! +$"+100);
@@ -483,6 +489,7 @@ function rollhelp() {
         }, this);
         }
     else if(num==1 && dogCount>0 ) {
+        cash.play();
         dogCount--;
         moneyCount+=200;
         win.setText("you sold a dog! +$"+200);
