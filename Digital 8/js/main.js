@@ -501,7 +501,7 @@ function rollhelp() {
 
     }
 function upgradeButton() {
-    upgradesound.play();
+    button.play();
         dice.visible=false;
     upgrade.setText("buy one more roll (-$100) \n\n upgrade store (-$500)");
     win.setText("store level " + store + "/3");
@@ -521,6 +521,7 @@ function upgradeButtonroll() {
      }
     }
 function upgradeButtonstore() {
+    upgradesound.play();
   if(moneyCount >= 500){
      moneyCount -= 500;
      store++;
