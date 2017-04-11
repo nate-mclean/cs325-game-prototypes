@@ -342,13 +342,13 @@ function addButtondog () {
     dogCount++;
         var test = Math.random();
     if(test<.25)
-        var dogy = dogsg.create(Math.floor((Math.random()*550)+350), Math.floor((Math.random()*150)+50), 'dog1');
+        var dogy = dogsg.create(Math.floor((Math.random()*150)+350), Math.floor((Math.random()*150)+250), 'dog1');
     else if(test >= .25 && test < .5)
-        var dogy = dogsg.create(Math.floor((Math.random()*550)+350), Math.floor((Math.random()*150)+50), 'dog2');
+        var dogy = dogsg.create(Math.floor((Math.random()*150)+350), Math.floor((Math.random()*150)+250), 'dog2');
     else if(test >= .5 && test < .75)
-        var dogy = dogsg.create(Math.floor((Math.random()*550)+350), Math.floor((Math.random()*150)+50), 'dog3');
+        var dogy = dogsg.create(Math.floor((Math.random()*150)+350), Math.floor((Math.random()*150)+250), 'dog3');
     else if(test >= .75 )
-        var dogy = dogsg.create(Math.floor((Math.random()*550)+350), Math.floor((Math.random()*150)+50), 'dog4');
+        var dogy = dogsg.create(Math.floor((Math.random()*150)+350), Math.floor((Math.random()*150)+250), 'dog4');
       }
 }
 function removeButtondog () {
