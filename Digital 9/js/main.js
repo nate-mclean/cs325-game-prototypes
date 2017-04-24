@@ -266,16 +266,22 @@ function resetletters () {
 function newword () {
     //button.play();
     //check if valid word
-    if(game.cache.getText('dictionary').indexOf(' ' + sentencetext.toLowerCase() + ' ') > -1){
-    alert(sentencetext.toLowerCase()+" is a valid word");
-    } else {
-    alert(sentencetext.toLowerCase()+" is not a valid word");
-    }
-    //
+    var word = sentencetext;
+    if(sentencetext.lastIndexOf(" ") != -1)
+        word = sentencetext.substring(sentencetext.lastIndexOf(" "), sentencetext.length);
+        
+    //check dictionary
+    if(game.cache.getText('dictionary').indexOf(' ' + word.toLowerCase() + ' ') > -1){
+    alert(word.toLowerCase()+" is a valid word");
     sentencetext += " ";
     sentence.setText(sentencetext);
     newwordbutton.alpha = .2;
     newwordbutton.inputEnabled  = false;
+    } else {
+        //not in dictionary
+    alert(word.toLowerCase()+" is not a valid word");
+    }
+    //
 
 }
 function playletter () {
