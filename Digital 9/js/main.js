@@ -268,7 +268,7 @@ function newword () {
     //check if valid word
     var word = sentencetext;
     if(sentencetext.lastIndexOf(" ") != -1)
-        word = sentencetext.substring(sentencetext.lastIndexOf(" "), sentencetext.length);
+        word = sentencetext.substring(sentencetext.lastIndexOf(" ")+1, sentencetext.length);
         
     //check dictionary
     if(game.cache.getText('dictionary').indexOf(' ' + word.toLowerCase() + ' ') > -1){
