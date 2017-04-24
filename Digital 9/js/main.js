@@ -129,6 +129,16 @@ function update() {
     playeronescore.setText(playeronescorenum);
     playertwoscore.setText(playertwoscorenum);
     playerturn.setText("Player "+playernum);
+    
+    //play letter button smart
+    if( state === false) {
+        playletterbutton.alpha = .2
+        playletterbutton.inputEnabled = false;
+    }
+    if( state === true) {
+        playletterbutton.alpha = 1
+        playletterbutton.inputEnabled = true;
+    }
 
     //button clicks
         newwordbutton.events.onInputDown.add(newword, this);
