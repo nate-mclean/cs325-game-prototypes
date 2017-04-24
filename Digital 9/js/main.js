@@ -222,6 +222,7 @@ if(state === true && hit === true){
 function newgame () {
     resetletters();
     newgamebutton.visible=false;
+    playletterbutton.inputEnabled = true;
     }
 function resetletters () {
     //get random letter strings
@@ -287,9 +288,15 @@ function newword () {
     sentence.setText(sentencetext);
     newwordbutton.alpha = .2;
     newwordbutton.inputEnabled  = false;
+    //extend to new line if too long
     } else {
         //not in dictionary
-    alert(word.toLowerCase()+" is not a valid word");
+    alert(word.toLowerCase()+" is not a valid word, GAME OVER!");
+    playeronescorenum = 0;
+    playertwoscorenum=0;
+    newgamebutton.visible = true;
+    playletterbutton.inputEnabled = false;
+    newwordbutton.inputEnabled = false;
     }
     //
 
@@ -308,6 +315,8 @@ function playletter () {
     playernum=2;
     else if(playernum === 2)
     playernum=1;
+    //re set letters 
+    resetletters();
     //re enable new word button
     newwordbutton.alpha = 1;
     newwordbutton.inputEnabled  = true;
