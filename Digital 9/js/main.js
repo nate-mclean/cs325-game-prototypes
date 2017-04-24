@@ -266,7 +266,7 @@ function resetletters () {
 function newword () {
     //button.play();
     //check if valid word
-    if(game.cache.getText('dictionary').indexOf(' ' + sentencetext + ' ') > -1){
+    if(game.cache.getText('dictionary').indexOf(' ' + sentencetext.toLowerCase() + ' ') > -1){
     alert(sentencetext+"exists");
     } else {
     alert(sentencetext+"does not exist");
