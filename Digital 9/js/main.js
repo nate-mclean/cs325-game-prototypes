@@ -267,9 +267,9 @@ function newword () {
     //button.play();
     //check if valid word
     if(game.cache.getText('dictionary').indexOf(' ' + sentencetext.toLowerCase() + ' ') > -1){
-    alert(sentencetext+"exists");
+    alert(sentencetext.toLowerCase()+" is a valid word");
     } else {
-    alert(sentencetext+"does not exist");
+    alert(sentencetext.toLowerCase()+" is not a valid word");
     }
     //
     sentencetext += " ";
