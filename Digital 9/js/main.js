@@ -228,7 +228,7 @@ function newgame () {
     newgamebutton.visible=false;
     playletterbutton.inputEnabled = true;
     ingame = true;
-    sentencetext = "";
+    sentence.setText(sentencetext);
     }
 function resetletters () {
     //get random letter strings
@@ -304,6 +304,7 @@ function newword () {
     playletterbutton.inputEnabled = false;
     newwordbutton.inputEnabled = false;
     ingame=false;
+    sentencetext="";
     }
     //
 
