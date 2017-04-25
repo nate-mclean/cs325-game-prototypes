@@ -311,7 +311,14 @@ function newword () {
 }
 function playletter () {
     //button.play();
-    //reset letter
+    
+    //check if its a word!
+    var word = sentencetext;
+    if(sentencetext.lastIndexOf(" ") != -1)
+        word = sentencetext.substring(sentencetext.lastIndexOf(" ")+1, sentencetext.length);
+        
+    //check dictionary to make sure its ok
+    if(game.cache.getText('dictionary').indexOf(' ' + word.toLowerCase() + ' ') > -1){
     state = false;
     //add points
     if(playernum === 1)
@@ -328,6 +335,17 @@ function playletter () {
     //re enable new word button
     newwordbutton.alpha = 1;
     newwordbutton.inputEnabled  = true;
-}
+    }
+    else {
+        //not in dictionary
+    alert(word.toLowerCase()+" is not a valid word, GAME OVER!");
+    newgamebutton.visible = true;
+    playletterbutton.inputEnabled = false;
+    newwordbutton.inputEnabled = false;
+    ingame=false;
+    sentencetext="";
+    }
+    
 }
 
+}
