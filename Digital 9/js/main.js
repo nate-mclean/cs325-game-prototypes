@@ -43,6 +43,7 @@ var music;
 
 //state
 var state = false;
+var ingame = false;
 
 //sprites
 var newgamebutton;
@@ -151,6 +152,8 @@ function update() {
     }
 }
 function checkfortile () {
+    
+    if(ingame){
     var x = Math.round(game.input.activePointer.position.x);     
     var y = Math.round(game.input.activePointer.position.y);
 
@@ -219,10 +222,12 @@ if(state === true && hit === true){
 }
 
 }
+}
 function newgame () {
     resetletters();
     newgamebutton.visible=false;
     playletterbutton.inputEnabled = true;
+    ingame = true;
     }
 function resetletters () {
     //get random letter strings
@@ -297,6 +302,7 @@ function newword () {
     newgamebutton.visible = true;
     playletterbutton.inputEnabled = false;
     newwordbutton.inputEnabled = false;
+    ingame=false;
     }
     //
 
