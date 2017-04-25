@@ -318,7 +318,7 @@ function playletter () {
         word = sentencetext.substring(sentencetext.lastIndexOf(" ")+1, sentencetext.length);
         
     //check dictionary to make sure its ok
-    if(game.cache.getText('dictionary').indexOf(' ' + word.toLowerCase() + ' ') > -1){
+    if(game.cache.getText('dictionary').indexOf(' ' + word.toLowerCase() ) > -1){
     state = false;
     //add points
     if(playernum === 1)
