@@ -338,7 +338,7 @@ function playletter () {
     }
     else {
         //not in dictionary
-    alert(word.toLowerCase()+" is not a valid word, GAME OVER!");
+    alert(word.toLowerCase()+" is not the start of a valid word, GAME OVER!");
     newgamebutton.visible = true;
     playletterbutton.inputEnabled = false;
     newwordbutton.inputEnabled = false;
