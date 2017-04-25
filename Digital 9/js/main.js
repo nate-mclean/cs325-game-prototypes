@@ -228,6 +228,7 @@ function newgame () {
     newgamebutton.visible=false;
     playletterbutton.inputEnabled = true;
     ingame = true;
+    sentencetext = "";
     }
 function resetletters () {
     //get random letter strings
