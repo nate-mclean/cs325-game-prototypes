@@ -229,6 +229,8 @@ function newgame () {
     playletterbutton.inputEnabled = true;
     ingame = true;
     sentence.setText(sentencetext);
+    playeronescorenum = 0;
+    playertwoscorenum = 0;
     }
 function resetletters () {
     //get random letter strings
@@ -298,8 +300,6 @@ function newword () {
     } else {
         //not in dictionary
     alert(word.toLowerCase()+" is not a valid word, GAME OVER!");
-    playeronescorenum = 0;
-    playertwoscorenum=0;
     newgamebutton.visible = true;
     playletterbutton.inputEnabled = false;
     newwordbutton.inputEnabled = false;
