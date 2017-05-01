@@ -317,7 +317,7 @@ function newword () {
         word = sentencetext.substring(sentencetext.lastIndexOf(" ")+1, sentencetext.length);
         
     //check dictionary
-    if(game.cache.getText('dictionary').indexOf(' ' + word.toLowerCase() + ' ') > -1){
+    if(game.cache.getText('dictionary').indexOf('\n' + word.toLowerCase() + '\n') > -1){
     alert(word.toLowerCase()+" is a valid word");
     sentencetext += " ";
     sentence.setText(sentencetext);
@@ -354,7 +354,7 @@ function playletter () {
         
         //if 1 OR 2 player, it will check you
     //check dictionary to make sure its ok
-    if(game.cache.getText('dictionary').indexOf(' ' + word.toLowerCase() ) > -1){
+    if(game.cache.getText('dictionary').indexOf('\n' + word.toLowerCase() ) > -1){
     state = false;
     //add points
     if(playernum === 1)
@@ -400,7 +400,7 @@ function playletter () {
         word = sentencetexttemp.substring(sentencetext.lastIndexOf(" ")+1, sentencetext.length);
 
     //check word
-    if(game.cache.getText('dictionary').indexOf(' ' + word.toLowerCase() ) > -1){
+    if(game.cache.getText('dictionary').indexOf('\n' + word.toLowerCase() ) > -1){
         sentencetext =  sentencetexttemp;
         playertwoscorenum += numbers[i];
         break;
