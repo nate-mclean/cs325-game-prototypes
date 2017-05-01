@@ -389,7 +389,8 @@ function playletter () {
     if(oneortwoplayer === false && ingame === true){
         
         //check all letters to see if any work as next letter. if so then play it
-        for( var  i =0; i< 20 ; i++ ) {
+        var i =0;
+        while( i < 20) {
             var sentencetexttemp = sentencetext + letters[i];
             sentence.setText(sentencetexttemp);
             
@@ -401,8 +402,9 @@ function playletter () {
     //check word
     if(game.cache.getText('dictionary').indexOf(' ' + word.toLowerCase() ) > -1){
         sentencetext =  sentencetexttemp;
+        break;
         }
-            
+           i++; 
             }
         //if no letters work then do a new word and play a random letter
         }
