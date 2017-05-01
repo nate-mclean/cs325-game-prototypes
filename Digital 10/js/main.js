@@ -142,6 +142,7 @@ function update() {
     playeronescore.setText(playeronescorenum);
     playertwoscore.setText(playertwoscorenum);
     playerturn.setText("Player "+playernum);
+    sentence.setText(sentencetext);
     
     //play letter button smart
     if( state === false) {
