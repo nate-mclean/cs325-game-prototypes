@@ -408,6 +408,12 @@ function playletter () {
            i++; 
             }
         //if no letters work then do a new word and play a random letter
+        if(i === 20){
+            newword();
+            if(ingame === true){
+            sentencetext += letters[5];
+            playertwoscorenum += numbers[5]; }
+            }
         }
 }
 
