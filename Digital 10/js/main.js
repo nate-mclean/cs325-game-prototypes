@@ -402,6 +402,7 @@ function playletter () {
     //check word
     if(game.cache.getText('dictionary').indexOf(' ' + word.toLowerCase() ) > -1){
         sentencetext =  sentencetexttemp;
+        playertwoscorenum += numbers[i];
         break;
         }
            i++; 
