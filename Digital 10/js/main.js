@@ -257,6 +257,7 @@ function newgame () {
     sentence.setText(sentencetext);
     playeronescorenum = 0;
     playertwoscorenum = 0;
+    playernum=1;
     }
 function resetletters () {
     //get random letter strings
@@ -358,13 +359,15 @@ function playletter () {
     //add points
     if(playernum === 1)
     playeronescorenum += numbers[index];
-    if(playernum === 2)
+    if(playernum === 2 && oneortwoplayer === true)
     playertwoscorenum += numbers[index];
-    //advance player
+    //advance player if in 2 player mode
+    if( oneortwoplayer === true){
     if (playernum === 1)
     playernum=2;
     else if(playernum === 2)
     playernum=1;
+    }
     //re set letters 
     resetletters();
     //re enable new word button
@@ -386,7 +389,21 @@ function playletter () {
     if(oneortwoplayer === false && ingame === true){
         
         //check all letters to see if any work as next letter. if so then play it
-        oneplayerbutton.visible = true;
+        for( var  i =0; i< 20 ; i++ ) {
+            var sentencetexttemp = sentencetext + letters[i];
+            sentence.setText(sentencetexttemp);
+            
+            //convert to word
+    var word = sentencetexttemp;
+    if(sentencetexttemp.lastIndexOf(" ") != -1)
+        word = sentencetexttemp.substring(sentencetext.lastIndexOf(" ")+1, sentencetext.length);
+
+    //check word
+    if(game.cache.getText('dictionary').indexOf(' ' + word.toLowerCase() ) > -1){
+        sentencetext =  sentencetexttemp;
+        }
+            
+            }
         //if no letters work then do a new word and play a random letter
         }
 }
