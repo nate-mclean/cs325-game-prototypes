@@ -392,7 +392,6 @@ function playletter () {
         var i =0;
         while( i < 20) {
             var sentencetexttemp = sentencetext + letters[i];
-            sentence.setText(sentencetexttemp);
             
             //convert to word
     var word = sentencetexttemp;
