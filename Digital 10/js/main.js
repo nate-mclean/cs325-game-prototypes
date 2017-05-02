@@ -31,8 +31,10 @@ function preload() {
     //dictionary 
     this.game.load.text('dictionary', 'assets/dictionary.txt');
     
-    //audio
-   //this.load.audio('song', 'assets/song.mp3');
+        //audio
+   this.load.audio('song', 'assets/song.mp3');
+   this.load.audio('button', 'assets/button1.mp3');
+   this.load.audio('upgrade', 'assets/upgrade.mp3');
 
 
 
@@ -42,6 +44,9 @@ function preload() {
 
 //sounds
 var music;
+var button;
+var upgradesound;
+var rollsound;
 
 //state
 var state = false;
@@ -85,8 +90,10 @@ var numbers;
 function create() {
 
 //music
-    //music = game.add.audio('song');
-    //music.play();
+    music = game.add.audio('song');
+    upgradesound = game.add.audio('upgrade');
+    button = game.add.audio('button');
+    music.play();
 
 
 //groups
@@ -176,6 +183,7 @@ function checkfortile () {
   var hit = false
 //within bounds
 if( x> 60 && x <900 && y >530 && y <680 ){
+    button.play();
     hit = true;
     newwordbutton.alpha = .2;
     newwordbutton.inputEnabled  = false;
@@ -239,16 +247,19 @@ if(state === true && hit === true){
 }
 }
 function oneplayer () {
+    button.play();
     oneortwoplayer = false;
     oneplayerbutton.alpha=1;
     twoplayerbutton.alpha=.3;
     }
 function twoplayer () {
+    button.play();
     oneortwoplayer= true;
     oneplayerbutton.alpha=.3;
     twoplayerbutton.alpha=1;
     }
 function newgame () {
+    upgradesound.play();
     resetletters();
     newgamebutton.visible=false;
     oneplayerbutton.visible=false;
@@ -311,7 +322,7 @@ function resetletters () {
     }
     
 function newword () {
-    //button.play();
+    button.play();
     //check if valid word
     var word = sentencetext;
     if(sentencetext.lastIndexOf(" ") != -1)
@@ -345,7 +356,7 @@ function newword () {
 //when you hit play letter, the computer will reply with his turn as well
 //will choose state based on mode (will ask mode at startup)
 function playletter () {
-    //button.play();
+    button.play();
     
     //if player 1, player!
     //check if its a word!
