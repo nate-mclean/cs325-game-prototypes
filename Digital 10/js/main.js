@@ -389,16 +389,26 @@ function playletter () {
     //if 1 player !!! then the AI goes next!
     if(oneortwoplayer === false && ingame === true){
         
+        //first see if you can make a new word with it
+        var word = sentencetext;
+    if(sentencetext.lastIndexOf(" ") != -1)
+        word = sentencetext.substring(sentencetext.lastIndexOf(" ")+1, sentencetext.length);
+        
+        
+                var i =0;
+        if(game.cache.getText('dictionary').indexOf('\n' + word.toLowerCase() + '\n') > -1){
+            newword();
+            sentencetext += letters[5];
+            playertwoscorenum += numbers[5]; 
+            }
+            else
+            {
         //check all letters to see if any work as next letter. if so then play it
-        var i =0;
         while( i < 20) {
             var sentencetexttemp = sentencetext + letters[i];
-            
-            //convert to word
-    var word = sentencetexttemp;
-    if(sentencetexttemp.lastIndexOf(" ") != -1)
-        word = sentencetexttemp.substring(sentencetext.lastIndexOf(" ")+1, sentencetext.length);
-
+            if(sentencetexttemp.lastIndexOf(" ") != -1)
+        word = sentencetexttemp.substring(sentencetext.lastIndexOf(" ")+1, sentencetexttemp.length);
+    
     //check word
     if(game.cache.getText('dictionary').indexOf('\n' + word.toLowerCase() ) > -1){
         sentencetext =  sentencetexttemp;
@@ -406,6 +416,7 @@ function playletter () {
         break;
         }
            i++; 
+            }
             }
         //if no letters work then do a new word and play a random letter
         if(i === 20){
