@@ -410,7 +410,7 @@ function playletter () {
         word = sentencetexttemp.substring(sentencetext.lastIndexOf(" ")+1, sentencetexttemp.length);
     
     //check word
-    if(game.cache.getText('dictionary').indexOf('\n' + word.toLowerCase() ) > -1){
+    if(game.cache.getText('dictionary').indexOf('\n' + word.toLowerCase() ) != -1){
         sentencetext =  sentencetexttemp;
         playertwoscorenum += numbers[i];
         break;
