@@ -405,10 +405,30 @@ function playletter () {
             {
         //check all letters to see if any work as next letter. if so then play it
         while( i < 20) {
-            var sentencetexttemp = sentencetext + letters[i];
+            var sentencetexttemp = "";
+            //check vowels
+            if( i <= 5) {
+                var rand = Math.random();
+                if(rand <.2)
+                    sentencetexttemp = sentencetext + "a";
+                if(rand >=.2 && rand < .4)
+                    sentencetexttemp = sentencetext + "e";
+                if(rand >=.4 && rand < .6)
+                    sentencetexttemp = sentencetext + "i";
+                if(rand >=.6 && rand < .8)
+                    sentencetexttemp = sentencetext + "o"
+                if(rand >=.8)
+                    sentencetexttemp = sentencetext + "u";
+
             if(sentencetexttemp.lastIndexOf(" ") != -1)
         word = sentencetexttemp.substring(sentencetext.lastIndexOf(" ")+1, sentencetexttemp.length);
-    
+                }
+            //check random letter
+            if( i > 5) {
+            sentencetexttemp = sentencetext + letters[i];
+            if(sentencetexttemp.lastIndexOf(" ") != -1)
+        word = sentencetexttemp.substring(sentencetext.lastIndexOf(" ")+1, sentencetexttemp.length);
+    }
     //check word
     if(game.cache.getText('dictionary').indexOf('\n' + word.toLowerCase() ) != -1){
         sentencetext =  sentencetexttemp;
