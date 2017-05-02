@@ -407,24 +407,24 @@ function playletter () {
         while( i < 20) {
             var sentencetexttemp = "";
             //check vowels
-            if( i <= 5) {
+            if( i <= 1) {
                 var rand = Math.random();
                 if(rand <.2)
-                    sentencetexttemp = sentencetext + "a";
+                    sentencetexttemp = sentencetext + "A";
                 if(rand >=.2 && rand < .4)
-                    sentencetexttemp = sentencetext + "e";
+                    sentencetexttemp = sentencetext + "E";
                 if(rand >=.4 && rand < .6)
-                    sentencetexttemp = sentencetext + "i";
+                    sentencetexttemp = sentencetext + "I";
                 if(rand >=.6 && rand < .8)
-                    sentencetexttemp = sentencetext + "o"
+                    sentencetexttemp = sentencetext + "O"
                 if(rand >=.8)
-                    sentencetexttemp = sentencetext + "u";
+                    sentencetexttemp = sentencetext + "U";
 
             if(sentencetexttemp.lastIndexOf(" ") != -1)
         word = sentencetexttemp.substring(sentencetext.lastIndexOf(" ")+1, sentencetexttemp.length);
                 }
             //check random letter
-            if( i > 5) {
+            if( i > 1) {
             sentencetexttemp = sentencetext + letters[i];
             if(sentencetexttemp.lastIndexOf(" ") != -1)
         word = sentencetexttemp.substring(sentencetext.lastIndexOf(" ")+1, sentencetexttemp.length);
