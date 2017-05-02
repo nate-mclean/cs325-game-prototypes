@@ -419,13 +419,15 @@ function playletter () {
                     sentencetexttemp = sentencetext + "O"
                 if(rand >=.8)
                     sentencetexttemp = sentencetext + "U";
-
+                    
+        word = sentencetexttemp;
             if(sentencetexttemp.lastIndexOf(" ") != -1)
         word = sentencetexttemp.substring(sentencetext.lastIndexOf(" ")+1, sentencetexttemp.length);
                 }
             //check random letter
             if( i > 1) {
             sentencetexttemp = sentencetext + letters[i];
+        word =  sentencetexttemp;
             if(sentencetexttemp.lastIndexOf(" ") != -1)
         word = sentencetexttemp.substring(sentencetext.lastIndexOf(" ")+1, sentencetexttemp.length);
     }
